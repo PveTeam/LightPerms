@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<PluginManifest xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <Name>LightPerms.Discord</Name>
+    <Guid>d53cf5e6-27ea-491b-9579-8506d93f184b</Guid>
+    <Version>v1.0.1</Version>
+    <Dependencies>
+        <PluginDependency>
+            <Plugin>5c3f35b3-ac9d-486f-8559-f931536c6700</Plugin>
+            <MinVersion>v1.0.1</MinVersion>
+        </PluginDependency>
+    </Dependencies>
+</PluginManifest>
