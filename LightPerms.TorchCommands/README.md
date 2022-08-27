@@ -9,3 +9,8 @@ All existing torch commands are indexed as `command.something`, spaces are repla
 For example if you want give to players ability to use `!fixship` command, you need to invoke this command `!lp add perm player command.fixship`
 
 Wildcards are also supported, for example command to give to admins ability to use all lp commands (you need to create group before using that command) `!lp add perm admin command.lp.*`
+
+### NOTICE
+
++ All commands will loose their attraction to keen roles such as admin scripter owner and other
++ All commands will be denied to use by default unless explicitly set by adding corresponding permissions
