@@ -1,6 +1,7 @@
 using System.IO;
 using System.Windows.Controls;
 using heh;
+using heh.Utils;
 using Torch;
 using Torch.API;
 using Torch.API.Managers;
@@ -12,12 +13,12 @@ namespace LightPerms;
 
 public class Plugin : TorchPluginBase, IWpfPlugin
 {
-    private Persistent<Config> _config = null!;
+    private ProperPersistent<Config> _config = null!;
 
     public override void Init(ITorchBase torch)
     {
         base.Init(torch);
-        _config = Persistent<Config>.Load(Path.Combine(StoragePath, "LightPerms.cfg"));
+        _config = new(Path.Combine(StoragePath, "LightPerms.cfg"));
         Torch.Managers.AddManager(DbManager.Static);
         Torch.Managers.AddManager(new PermissionsManager(Torch));
         Torch.Managers.GetManager<ITorchSessionManager>().AddFactory(s => new MultiplayerMembersManager(s.Torch));
