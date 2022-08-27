@@ -18,6 +18,17 @@ public interface IPermissionsManager : IManager
     IDatabase Db { get; }
 }
 
+public class GroupAssignedEventArgs : EventArgs
+{
+    public GroupAssignedEventArgs(ulong clientId, string groupName)
+    {
+        ClientId = clientId;
+        GroupName = groupName;
+    }
+
+    public ulong ClientId { get; }
+    public string GroupName { get; }
+}
 public class PermissionsManager : Manager, IPermissionsManager
 {
     private static readonly ILogger Log = LogManager.GetCurrentClassLogger();
@@ -25,6 +36,8 @@ public class PermissionsManager : Manager, IPermissionsManager
     
     [Dependency]
     private readonly IDbManager _dbManager = null!;
+
+    public event EventHandler<GroupAssignedEventArgs>? GroupAssigned; 
 
     public PermissionsManager(ITorchBase torchInstance) : base(torchInstance)
     {
@@ -75,6 +88,8 @@ public class PermissionsManager : Manager, IPermissionsManager
             ClientId = clientId.ToString(),
             GroupUid = group.Uid
         });
+        
+        GroupAssigned?.Invoke(this, new(clientId, groupName));
     }
     public Group? GetGroup(string groupName)
     {
