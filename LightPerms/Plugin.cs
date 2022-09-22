@@ -21,7 +21,7 @@ public class Plugin : TorchPluginBase, IWpfPlugin
         _config = new(Path.Combine(StoragePath, "LightPerms.cfg"));
         Torch.Managers.AddManager(DbManager.Static);
         Torch.Managers.AddManager(new PermissionsManager(Torch));
-        Torch.Managers.GetManager<ITorchSessionManager>().AddFactory(s => new MultiplayerMembersManager(s.Torch));
+        Torch.Managers.GetManager<ITorchSessionManager>().AddFactory(s => new MultiplayerMembersManager(s.Torch, _config.Data));
     }
 
     public UserControl GetControl() => new PropertyGrid
