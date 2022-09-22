@@ -29,6 +29,21 @@ public class LpCommands : CommandModule
         db.Insert(new GroupMember {Name = Context.Player.DisplayName, ClientId = Context.Player.SteamUserId.ToString(), GroupUid = playerGroup});
     }
 #endif
+
+    [Command("get members")]
+    [Permission(MyPromoteLevel.Admin)]
+    public void GetGroupMembers(string groupName)
+    {
+        if (Pm.Db.SingleOrDefault<Group>(Sql.Builder.Where("name = @0", groupName)) is not { } group)
+        {
+            Context.Respond("No group found with given name");
+            return;
+        }
+
+        var members = Pm.Db.Query<GroupMember>(Sql.Builder.Where("group_uid = @0", group.Uid)).ToArray();
+        
+        Context.Respond($"Members of {groupName} group ({members.Length} total):\n   {string.Join("\n   ", members.Select(b => $"{b.Name} ({b.ClientId})"))}");
+    }
     
     [Command("has perm")]
     [Permission(MyPromoteLevel.Admin)]
