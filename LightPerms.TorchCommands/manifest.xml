@@ -2,11 +2,11 @@
 <PluginManifest xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <Name>LightPerms.TorchCommands</Name>
     <Guid>0cf57780-f235-4240-99cd-ebd7463e673a</Guid>
-    <Version>v1.0.0</Version>
+    <Version>v1.0.1</Version>
     <Dependencies>
         <PluginDependency>
             <Plugin>5c3f35b3-ac9d-486f-8559-f931536c6700</Plugin>
-            <MinVersion>v1.0.5</MinVersion>
+            <MinVersion>v1.0.7</MinVersion>
         </PluginDependency>
     </Dependencies>
 </PluginManifest>
