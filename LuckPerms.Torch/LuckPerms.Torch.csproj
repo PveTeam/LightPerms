@@ -1,0 +1,258 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net48</TargetFramework>
+        <LangVersion>12</LangVersion>
+        <Nullable>enable</Nullable>
+        <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+        <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
+        <EnableWindowsTargeting>true</EnableWindowsTargeting>
+        <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+    </PropertyGroup>
+
+    <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+        <DebugSymbols>false</DebugSymbols>
+        <DebugType>none</DebugType>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="IKVM" Version="8.7.1" />
+        <PackageReference Include="Lib.Harmony" Version="2.3.0-prerelease.2" />
+        <PackageReference Include="PolySharp" Version="1.13.2">
+          <PrivateAssets>all</PrivateAssets>
+          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+        <PackageReference Include="torch.server.referenceassemblies" Version="1.3.1.260-master" PrivateAssets="all" IncludeAssets="compile" />
+    </ItemGroup>
+    
+    <PropertyGroup>
+        <LibsPath>$(ProjectDir)libs\</LibsPath>
+        <ApiJarPath>$(LibsPath)api-5.4.jar</ApiJarPath>
+        <CommonJarPath>$(LibsPath)common-5.4-SNAPSHOT.jar</CommonJarPath>
+        
+        <TypesafeConfigPath>$(LibsPath)config-1.4.0.jar</TypesafeConfigPath>
+        <Toml4jPath>$(LibsPath)toml4j-0.7.2.jar</Toml4jPath>
+        <ConfigurateTomlPath>$(LibsPath)configurate-toml-3.7.jar</ConfigurateTomlPath>
+        <ConfigurateGsonPath>$(LibsPath)configurate-gson-3.7.2.jar</ConfigurateGsonPath>
+        <ConfigurateHoconPath>$(LibsPath)configurate-hocon-3.7.2.jar</ConfigurateHoconPath>
+        <ConfigurateCorePath>$(LibsPath)configurate-core-3.7.2.jar</ConfigurateCorePath>
+        <ConfigurateYamlPath>$(LibsPath)configurate-yaml-3.7.2.jar</ConfigurateYamlPath>
+        <SnakeYamlPath>$(LibsPath)snakeyaml-1.26.jar</SnakeYamlPath>
+        <CheckerQualPath>$(LibsPath)checker-qual-3.12.0.jar</CheckerQualPath>
+
+        <AdventureTextPlainPath>$(LibsPath)adventure-text-serializer-plain-4.11.0.jar</AdventureTextPlainPath>
+        <AdventureTextLegacyPath>$(LibsPath)adventure-text-serializer-legacy-4.11.0.jar</AdventureTextLegacyPath>
+        <AdventureTextMinimessagePath>$(LibsPath)adventure-text-minimessage-4.11.0.jar</AdventureTextMinimessagePath>
+        <AdventureApiPath>$(LibsPath)adventure-api-4.11.0.jar</AdventureApiPath>
+        <AdventureKeyPath>$(LibsPath)adventure-key-4.11.0.jar</AdventureKeyPath>
+        <ExaminationApiPath>$(LibsPath)examination-api-1.3.0.jar</ExaminationApiPath>
+        <ExaminationStringPath>$(LibsPath)examination-string-1.3.0.jar</ExaminationStringPath>
+        
+        <AnnotationsPath>$(LibsPath)annotations-23.0.0.jar</AnnotationsPath>
+        <GuavaPath>$(LibsPath)guava-19.0.jar</GuavaPath>
+        <ErrorProneAnnotationsPath>$(LibsPath)error_prone_annotations-2.0.2.jar</ErrorProneAnnotationsPath>
+        <AnimalSnifferAnnotationsPath>$(LibsPath)animal-sniffer-annotations-1.14.jar</AnimalSnifferAnnotationsPath>
+        <J2objcAnnotationsPath>$(LibsPath)j2objc-annotations-0.1.jar</J2objcAnnotationsPath>
+        <Jsr305Path>$(LibsPath)jsr305-1.3.9.jar</Jsr305Path>
+        <GsonPath>$(LibsPath)gson-2.7.jar</GsonPath>
+        
+        <BrigadierPath>$(LibsPath)brigadier-1.0.18.jar</BrigadierPath>
+        
+        <EventApiPath>$(LibsPath)event-api-3.0.0.jar</EventApiPath>
+        
+        <Slf4jApiPath>$(LibsPath)slf4j-api-1.7.30.jar</Slf4jApiPath>
+        <Log4jApiPath>$(LibsPath)log4j-api-2.14.0.jar</Log4jApiPath>
+        
+        <CaffeinePath>$(LibsPath)caffeine-2.9.0.jar</CaffeinePath>
+        
+        <OkioPath>$(LibsPath)okio-1.17.5.jar</OkioPath>
+        <OkHttpPath>$(LibsPath)okhttp-3.14.9.jar</OkHttpPath>
+        <ConscryptPath>$(LibsPath)conscrypt-openjdk-uber-2.0.0.jar</ConscryptPath>
+        
+        <ByteBuddyPath>$(LibsPath)byte-buddy-1.10.22.jar</ByteBuddyPath>
+        
+        <EddsaPath>$(LibsPath)eddsa-0.3.0.jar</EddsaPath>
+        <JnatsPath>$(LibsPath)jnats-2.16.4.jar</JnatsPath>
+        
+        <HikariCPPath>$(LibsPath)HikariCP-4.0.3.jar</HikariCPPath>
+        
+        <JsonPath>$(LibsPath)json-20230227.jar</JsonPath>
+        <CommonsPoolPath>$(LibsPath)pool2-2.11.1.jar</CommonsPoolPath>
+        <JedisPath>$(LibsPath)jedis-4.4.3.jar</JedisPath>
+        
+        <AmqpClientPath>$(LibsPath)amqp-client-5.12.0.jar</AmqpClientPath>
+        
+        <BsonPath>$(LibsPath)bson-4.5.0.jar</BsonPath>
+        <MongoDriverCorePath>$(LibsPath)mongodb-driver-core-4.5.0.jar</MongoDriverCorePath>
+        <MongoDriverSyncPath>$(LibsPath)mongodb-driver-sync-4.5.0.jar</MongoDriverSyncPath>
+        <MongoDriverLegacyPath>$(LibsPath)mongodb-driver-legacy-4.5.0.jar</MongoDriverLegacyPath>
+        
+        <PostgreSqlPath>$(LibsPath)postgresql-42.6.0.jar</PostgreSqlPath>
+        
+        <H2Path>$(LibsPath)h2-2.1.214.jar</H2Path>
+        
+        <MariaDbPath>$(LibsPath)mariadb-java-client-3.3.0.jar</MariaDbPath>
+        <WaffleJnaPath>$(LibsPath)waffle-jna-3.3.0.jar</WaffleJnaPath>
+        <JclOverSlf4jPath>$(LibsPath)jcl-over-slf4j-2.0.7.jar</JclOverSlf4jPath>
+        <JnaPlatformPath>$(LibsPath)jna-platform-5.13.0.jar</JnaPlatformPath>
+        <JnaPath>$(LibsPath)jna-5.13.0.jar</JnaPath>
+        
+        <MySqlPath>$(LibsPath)mysql-connector-j-8.0.33.jar</MySqlPath>
+        <ProtobufPath>$(LibsPath)protobuf-java-3.21.9.jar</ProtobufPath>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <IkvmReference Include="$(MySqlPath)">
+            <References>$(ProtobufPath)</References>
+        </IkvmReference>
+        <IkvmReference Include="$(ProtobufPath)" />
+
+        <IkvmReference Include="$(MariaDbPath)">
+            <References>$(WaffleJnaPath);$(Slf4jApiPath)</References>
+        </IkvmReference>
+        <IkvmReference Include="$(WaffleJnaPath)">
+            <References>$(Slf4jApiPath);$(JclOverSlf4jPath);$(CheckerQualPath);$(JnaPlatformPath);$(JnaPath);$(CaffeinePath)</References>
+        </IkvmReference>
+        <IkvmReference Include="$(JclOverSlf4jPath)">
+            <References>$(Slf4jApiPath)</References>
+        </IkvmReference>
+        <IkvmReference Include="$(JnaPlatformPath)">
+            <References>$(JnaPath)</References>
+        </IkvmReference>
+        <IkvmReference Include="$(JnaPath)" />
+        
+        <IkvmReference Include="$(H2Path)" />
+        <IkvmReference Include="$(PostgreSqlPath)" />
+        
+        <IkvmReference Include="$(MongoDriverLegacyPath)">
+            <References>$(Slf4jApiPath);$(BsonPath);$(MongoDriverCorePath);$(MongoDriverSyncPath)</References>
+        </IkvmReference>
+        <IkvmReference Include="$(MongoDriverSyncPath)">
+            <References>$(Slf4jApiPath);$(BsonPath);$(MongoDriverCorePath)</References>
+        </IkvmReference>
+        <IkvmReference Include="$(MongoDriverCorePath)">
+            <References>$(Slf4jApiPath);$(BsonPath)</References>
+        </IkvmReference>
+        <IkvmReference Include="$(BsonPath)">
+            <References>$(Slf4jApiPath)</References>
+        </IkvmReference>
+        
+        <IkvmReference Include="$(AmqpClientPath)">
+            <References>$(Slf4jApiPath)</References>
+        </IkvmReference>
+        
+        <IkvmReference Include="$(JedisPath)">
+            <References>$(Slf4jApiPath);$(CommonsPoolPath);$(JsonPath);$(GsonPath)</References>
+        </IkvmReference>
+        <IkvmReference Include="$(JsonPath)">
+            <AssemblyVersion>2023.02.27.0</AssemblyVersion>
+        </IkvmReference>
+        <IkvmReference Include="$(CommonsPoolPath)" />
+        
+        <IkvmReference Include="$(HikariCPPath)">
+            <References>$(Slf4jApiPath)</References>
+        </IkvmReference>
+        
+        <IkvmReference Include="$(JnatsPath)">
+            <References>$(EddsaPath)</References>
+        </IkvmReference>
+        <IkvmReference Include="$(EddsaPath)" />
+        
+        <IkvmReference Include="$(ByteBuddyPath)" />
+        
+        <IkvmReference Include="$(OkHttpPath)">
+            <References>$(OkioPath);$(ConscryptPath)</References>
+        </IkvmReference>
+        <IkvmReference Include="$(OkioPath)">
+            <References>$(AnimalSnifferAnnotationsPath)</References>
+        </IkvmReference>
+        <IkvmReference Include="$(ConscryptPath)" />
+        
+        <IkvmReference Include="$(CaffeinePath)">
+            <References>$(ErrorProneAnnotationsPath);$(CheckerQualPath)</References>
+        </IkvmReference>
+        
+        <IkvmReference Include="$(Slf4jApiPath)" />
+        <IkvmReference Include="$(Log4jApiPath)" />
+        
+        <IkvmReference Include="$(EventApiPath)">
+            <References>$(GuavaPath);$(CheckerQualPath)</References>
+        </IkvmReference>
+        
+        <IkvmReference Include="$(BrigadierPath)" />
+        
+        <IkvmReference Include="$(GsonPath)" />
+        <IkvmReference Include="$(ErrorProneAnnotationsPath)" />
+        <IkvmReference Include="$(AnimalSnifferAnnotationsPath)" />
+        <IkvmReference Include="$(J2objcAnnotationsPath)" />
+        <IkvmReference Include="$(Jsr305Path)" />
+        <IkvmReference Include="$(GuavaPath)">
+            <References>$(ErrorProneAnnotationsPath);$(AnimalSnifferAnnotationsPath);$(J2objcAnnotationsPath);$(Jsr305Path)</References>
+        </IkvmReference>
+        <IkvmReference Include="$(AnnotationsPath)" />
+        
+        <IkvmReference Include="$(ExaminationApiPath)">
+            <Reference>$(AnnotationsPath)</Reference>
+        </IkvmReference>
+        <IkvmReference Include="$(ExaminationStringPath)" />
+        <IkvmReference Include="$(AdventureKeyPath)">
+            <References>$(ExaminationApiPath);$(ExaminationStringPath);$(AnnotationsPath)</References>
+        </IkvmReference>
+        <IkvmReference Include="$(AdventureApiPath)">
+            <References>$(ExaminationApiPath);$(ExaminationStringPath);$(AdventureKeyPath);$(AnnotationsPath)</References>
+        </IkvmReference>
+        <IkvmReference Include="$(AdventureTextPlainPath)">
+            <References>$(AdventureApiPath);$(AnnotationsPath);$(ExaminationApiPath)</References>
+        </IkvmReference>
+        <IkvmReference Include="$(AdventureTextLegacyPath)">
+            <References>$(AdventureApiPath);$(ExaminationApiPath)</References>
+        </IkvmReference>
+        <IkvmReference Include="$(AdventureTextMinimessagePath)">
+            <References>$(AdventureApiPath);$(ExaminationApiPath)</References>
+        </IkvmReference>
+        
+        <IkvmReference Include="$(Toml4jPath)">
+            <References>$(GsonPath)</References>
+        </IkvmReference>
+        <IkvmReference Include="$(TypesafeConfigPath)" />
+        <IkvmReference Include="$(ConfigurateTomlPath)">
+            <References>$(ConfigurateCorePath);$(Toml4jPath);$(GuavaPath)</References>
+        </IkvmReference>
+        <IkvmReference Include="$(ConfigurateGsonPath)">
+            <References>$(ConfigurateCorePath);$(GsonPath)</References>
+        </IkvmReference>
+        <IkvmReference Include="$(ConfigurateHoconPath)">
+            <References>$(ConfigurateCorePath);$(TypesafeConfigPath)</References>
+        </IkvmReference>
+        <IkvmReference Include="$(ConfigurateCorePath)">
+            <References>$(CheckerQualPath);$(GuavaPath)</References>
+        </IkvmReference>
+        <IkvmReference Include="$(ConfigurateYamlPath)">
+            <References>$(ConfigurateCorePath);$(SnakeYamlPath)</References>
+        </IkvmReference>
+        <IkvmReference Include="$(SnakeYamlPath)" />
+        <IkvmReference Include="$(CheckerQualPath)" />
+        
+        <IkvmReference Include="$(ApiJarPath)" />
+        <IkvmReference Include="$(CommonJarPath)">
+            <References>$(ApiJarPath);$(ConfigurateCorePath);$(ConfigurateGsonPath);$(ConfigurateHoconPath);$(ConfigurateYamlPath);$(SnakeYamlPath);$(CheckerQualPath);$(AdventureApiPath);$(AdventureKeyPath);$(AdventureTextPlainPath);$(AdventureTextLegacyPath);$(AdventureTextMinimessagePath);$(ExaminationApiPath);$(GuavaPath);$(GsonPath);$(ConfigurateTomlPath);$(BrigadierPath);$(EventApiPath);$(Slf4jApiPath);$(Log4jApiPath);$(CaffeinePath);$(OkHttpPath);$(OkioPath);$(ByteBuddyPath);$(JnatsPath);$(HikariCPPath);$(JedisPath);$(CommonsPoolPath);$(AmqpClientPath);$(BsonPath);$(MongoDriverCorePath);$(MongoDriverLegacyPath);$(MongoDriverSyncPath);$(PostgreSqlPath);$(H2Path);$(MariaDbPath);$(MySqlPath)</References>
+        </IkvmReference>
+    </ItemGroup>
+
+    <ItemGroup>
+        <Content Include="manifest.xml">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+            <CopyToPublishDirectory>Always</CopyToPublishDirectory>
+        </Content>
+    </ItemGroup>
+
+    <ItemGroup>
+      <EmbeddedResource Include="Resources\schema\h2.sql" LogicalName="me.lucko.luckperms.schema.h2.sql" />
+      <EmbeddedResource Include="Resources\schema\mariadb.sql" LogicalName="me.lucko.luckperms.schema.mariadb.sql" />
+      <EmbeddedResource Include="Resources\schema\mysql.sql" LogicalName="me.lucko.luckperms.schema.mysql.sql" />
+      <EmbeddedResource Include="Resources\schema\postgresql.sql" LogicalName="me.lucko.luckperms.schema.postgresql.sql" />
+      <EmbeddedResource Include="Resources\schema\sqlite.sql" LogicalName="me.lucko.luckperms.schema.sqlite.sql" />
+      <EmbeddedResource Include="Resources\config.yml" LogicalName="config.yml" />
+    </ItemGroup>
+
+</Project>

@@ -1,0 +1,40 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LightPerms", "LightPerms\LightPerms.csproj", "{3963D8F4-CCB6-4305-8FEC-A19597404A19}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LightPerms.Discord", "LightPerms.Discord\LightPerms.Discord.csproj", "{B1A35416-6CFB-4AE7-A2F2-818E8F7A8C13}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LightPerms.TorchCommands", "LightPerms.TorchCommands\LightPerms.TorchCommands.csproj", "{8F9D910F-FFE6-4010-921F-5872ACF638BB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LuckPerms.Torch", "LuckPerms.Torch\LuckPerms.Torch.csproj", "{2C069BB5-B110-4024-93B7-28C6965AD21F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LuckPerms.Loader", "LuckPerms.Loader\LuckPerms.Loader.csproj", "{D1D4E971-39CE-482C-A56D-9448A77883BB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3963D8F4-CCB6-4305-8FEC-A19597404A19}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3963D8F4-CCB6-4305-8FEC-A19597404A19}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3963D8F4-CCB6-4305-8FEC-A19597404A19}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3963D8F4-CCB6-4305-8FEC-A19597404A19}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B1A35416-6CFB-4AE7-A2F2-818E8F7A8C13}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B1A35416-6CFB-4AE7-A2F2-818E8F7A8C13}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B1A35416-6CFB-4AE7-A2F2-818E8F7A8C13}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B1A35416-6CFB-4AE7-A2F2-818E8F7A8C13}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8F9D910F-FFE6-4010-921F-5872ACF638BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8F9D910F-FFE6-4010-921F-5872ACF638BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8F9D910F-FFE6-4010-921F-5872ACF638BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8F9D910F-FFE6-4010-921F-5872ACF638BB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2C069BB5-B110-4024-93B7-28C6965AD21F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2C069BB5-B110-4024-93B7-28C6965AD21F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2C069BB5-B110-4024-93B7-28C6965AD21F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2C069BB5-B110-4024-93B7-28C6965AD21F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D1D4E971-39CE-482C-A56D-9448A77883BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D1D4E971-39CE-482C-A56D-9448A77883BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D1D4E971-39CE-482C-A56D-9448A77883BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D1D4E971-39CE-482C-A56D-9448A77883BB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

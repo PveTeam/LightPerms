@@ -1,0 +1,67 @@
+{
+  "version": 1,
+  "dependencies": {
+    ".NETFramework,Version=v4.8": {
+      "Krafs.Publicizer": {
+        "type": "Direct",
+        "requested": "[2.2.1, )",
+        "resolved": "2.2.1",
+        "contentHash": "QGI4nMGQbKsuFUUboixVHu4mv3lHB5RejIa7toIlzTmwLkuCYYEpUBJjmy3OpXYyj5dVSZAXVbr4oeMSloE67Q=="
+      },
+      "Microsoft.NETFramework.ReferenceAssemblies": {
+        "type": "Direct",
+        "requested": "[1.0.3, )",
+        "resolved": "1.0.3",
+        "contentHash": "vUc9Npcs14QsyOD01tnv/m8sQUnGTGOw1BCmKcv77LBJY7OxhJ+zJF7UD/sCL3lYNFuqmQEVlkfS4Quif6FyYg==",
+        "dependencies": {
+          "Microsoft.NETFramework.ReferenceAssemblies.net48": "1.0.3"
+        }
+      },
+      "PolySharp": {
+        "type": "Direct",
+        "requested": "[1.13.2, )",
+        "resolved": "1.13.2",
+        "contentHash": "XwNhfkr7IeUiH8AE4pzob8YioxfL6nxgAx+fHEeWCObY/NZuBMfWLh39FznXbneKvagiqeeI7quIvZ6P1eVaEA=="
+      },
+      "Torch.Server.ReferenceAssemblies": {
+        "type": "Direct",
+        "requested": "[1.3.1.260-master, )",
+        "resolved": "1.3.1.260-master",
+        "contentHash": "p9fHBwPI2BZDLO2PiSPvJxHQ7lksYf/20BZ0uUxMlSnJk/AvFUpjT6CMxJWow4UuAFG+NcPEI4VhxZ5x9jhGGA==",
+        "dependencies": {
+          "NLog": "4.4.12",
+          "Newtonsoft.Json": "12.0.2",
+          "SpaceEngineersDedicated.ReferenceAssemblies": "1.203.505"
+        }
+      },
+      "Microsoft.NETFramework.ReferenceAssemblies.net48": {
+        "type": "Transitive",
+        "resolved": "1.0.3",
+        "contentHash": "zMk4D+9zyiEWByyQ7oPImPN/Jhpj166Ky0Nlla4eXlNL8hI/BtSJsgR8Inldd4NNpIAH3oh8yym0W2DrhXdSLQ=="
+      },
+      "Newtonsoft.Json": {
+        "type": "Transitive",
+        "resolved": "12.0.2",
+        "contentHash": "rTK0s2EKlfHsQsH6Yx2smvcTCeyoDNgCW7FEYyV01drPlh2T243PR2DiDXqtC5N4GDm4Ma/lkxfW5a/4793vbA=="
+      },
+      "NLog": {
+        "type": "Transitive",
+        "resolved": "4.4.12",
+        "contentHash": "fODew3BFT2XhAuqhGo2ZYT9OJE0ciGEBfvKXOmAAvaDsP/3ROIf083p8QUnmwKKw4jCkVW06ObX6gn/eFi2Skg=="
+      },
+      "protobuf-net": {
+        "type": "Transitive",
+        "resolved": "1.0.0",
+        "contentHash": "kTGOK0E87473sOImOjgZOnz3kTC2aMLffoRWQLYNuBLJnwNNmjanF9IkevZ9Q7yYLeABQfcF3BpeepuMntMVNw=="
+      },
+      "SpaceEngineersDedicated.ReferenceAssemblies": {
+        "type": "Transitive",
+        "resolved": "1.203.505",
+        "contentHash": "Wq4GIn2ilHyFdLdVKdVhC7iGQ+1FdVsChKY6hyQluFYSSV7oe8bDc9aTZC8XgxNMKCZoQBSVyaYHxQD+74BySQ==",
+        "dependencies": {
+          "protobuf-net": "1.0.0"
+        }
+      }
+    }
+  }
+}
