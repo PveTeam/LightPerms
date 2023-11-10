@@ -4,6 +4,8 @@ using System.Linq;
 using ikvm.extensions;
 using ikvm.runtime;
 using java.lang;
+using LuckPerms.Torch.Extensions;
+using Torch.API;
 using Torch.API.Managers;
 using VRage.Scripting;
 
@@ -18,7 +20,8 @@ public class ModApiManager : IManager
 
         MyScriptCompiler.Static.AddReferencedAssemblies(
             typeof(net.luckperms.api.LuckPerms).Assembly.Location, // net.luckperms.api.dll
-            typeof(java.lang.Boolean).Assembly.Location // IKVM.Java.dll
+            typeof(java.lang.Boolean).Assembly.Location, // IKVM.Java.dll
+            typeof(ModApiManager).Assembly.Location // LuckPerms.Torch.dll
         );
         
         using var whitelist = MyScriptCompiler.Static.Whitelist.OpenBatch();
@@ -27,7 +30,8 @@ public class ModApiManager : IManager
         whitelist.AllowNamespaceOfTypes(MyWhitelistTarget.ModApi, typeof(java.util.function.Consumer), typeof(java.util.UUID), typeof(java.time.Instant), typeof(java.time.temporal.Temporal));
         whitelist.AllowTypes(MyWhitelistTarget.ModApi, typeof(java.lang.Boolean), typeof(java.lang.Enum),
             typeof(AutoCloseable), typeof(java.util.concurrent.TimeUnit),
-            typeof(java.util.concurrent.CompletableFuture));
+            typeof(java.util.concurrent.CompletableFuture),
+            typeof(java.util.concurrent.Executor));
         whitelist.AllowMembers(MyWhitelistTarget.ModApi,
             typeof(Class).GetMethod("op_Implicit", new[] { typeof(Type) }),
             typeof(Class).GetMethod(nameof(Class.getName)),
@@ -38,6 +42,11 @@ public class ModApiManager : IManager
             typeof(Util).GetMethod(nameof(Util.getRuntimeTypeFromClass)),
             typeof(ExtensionMethods).GetMethod(nameof(ExtensionMethods.getClass), new []{ typeof(object) }),
             typeof(java.lang.Object).GetMethod(nameof(java.lang.Object.getClass)));
+        
+        whitelist.AllowNamespaceOfTypes(MyWhitelistTarget.ModApi, typeof(UuidExtensions));
+        whitelist.AllowTypes(MyWhitelistTarget.ModApi, typeof(TorchApi), typeof(IDependencyProvider), typeof(IManager),
+            typeof(DependencyProviderExtensions), typeof(IMultiplayerManagerServer), typeof(IMultiplayerManagerBase),
+            typeof(IPlayer), typeof(ConnectionState));
     }
 
     public void Detach()

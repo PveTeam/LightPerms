@@ -5,7 +5,7 @@ using Torch.Utils;
 
 namespace LuckPerms.Torch.Extensions;
 
-public static class StreamExtensions
+internal static class StreamExtensions
 {
     public static InputStream GetInputStream(this Stream stream)
     {

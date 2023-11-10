@@ -4,7 +4,7 @@ using me.lucko.luckperms.common.config.generic.key;
 
 namespace LuckPerms.Torch.Extensions;
 
-public static class KeyedConfigurationExtensions
+internal static class KeyedConfigurationExtensions
 {
     public static bool GetBoolean(this KeyedConfiguration config, ConfigKey key, bool defaultValue = default)
     {
