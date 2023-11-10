@@ -6,6 +6,7 @@ using LuckPerms.Torch.Extensions;
 using LuckPerms.Torch.Impl.Calculator;
 using LuckPerms.Torch.Impl.Listeners;
 using LuckPerms.Torch.Impl.Messaging;
+using LuckPerms.Torch.ModApi;
 using LuckPerms.Torch.PlatformHooks;
 using me.lucko.luckperms.common.api;
 using me.lucko.luckperms.common.calculator;
@@ -71,6 +72,7 @@ public class LpTorchPlugin(LuckPermsBootstrap bootstrap, ITorchBase torch) : Abs
         _trackManager = new(this);
         _connectionListener = new(this);
         torch.Managers.GetManager<ITorchSessionManager>().AddFactory(_ => _connectionListener);
+        torch.Managers.GetManager<ITorchSessionManager>().AddFactory(_ => new ModApiManager());
     }
 
     protected override CalculatorFactory provideCalculatorFactory() => new LpCalculatorFactory(this);
