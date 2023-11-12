@@ -15,14 +15,10 @@ public static class IteratorExtensions
     {
         public bool MoveNext()
         {
-            if (iterator.hasNext())
-            {
-                Current = iterator.next() is T ? (T)iterator.next() : default;
-                return true;
-            }
-
-            Current = default;
-            return false;
+            if (!iterator.hasNext()) return false;
+            
+            Current = (T)iterator.next();
+            return true;
         }
 
         public void Reset()
@@ -32,7 +28,7 @@ public static class IteratorExtensions
 
         object? IEnumerator.Current => Current;
 
-        public T? Current { get; private set; }
+        public T Current { get; private set; }
 
         public void Dispose()
         {

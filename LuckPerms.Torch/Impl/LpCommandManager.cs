@@ -1,6 +1,5 @@
 ﻿using me.lucko.luckperms.common.command.utils;
 using me.lucko.luckperms.common.plugin;
-using me.lucko.luckperms.common.sender;
 using Torch.API.Managers;
 using Torch.Commands;
 using Torch.Managers;
@@ -24,7 +23,7 @@ public class LpCommandManager(LuckPermsPlugin plugin, LpSenderFactory senderFact
         foreach (var alias in Aliases)
         {
             _commandManager.Commands.AddCommand(new(alias, "LuckPerms commands", (ctx, _) => Execute(alias, ctx),
-                ((LpTorchBootstrap)plugin.getBootstrap()).GetTorchPlugin(), MyPromoteLevel.None));
+                ((LpTorchBootstrap)getPlugin().getBootstrap()).GetTorchPlugin(), MyPromoteLevel.None));
         }
     }
 
