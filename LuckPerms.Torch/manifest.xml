@@ -2,5 +2,5 @@
 <PluginManifest xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <Name>LuckPerms.Torch</Name>
     <Guid>7E4B3CC8-64FA-416E-8910-AACDF2DA5E2C</Guid>
-    <Version>v5.4.106.3</Version>
+    <Version>v5.4.106.4</Version>
 </PluginManifest>
