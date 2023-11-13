@@ -41,12 +41,12 @@ public class LpTorchPlugin(LuckPermsBootstrap bootstrap, ITorchBase torch) : Abs
     private LpContextManager? _contextManager;
     private LpSenderFactory? _senderFactory;
     private LpConnectionListener? _connectionListener;
+    private global::Torch.Managers.DependencyManager? _dependencyManager;
     public override LuckPermsBootstrap getBootstrap() => bootstrap;
 
     protected override void setupSenderFactory()
     {
-        _senderFactory = new LpSenderFactory(this);
-        torch.Managers.GetManager<ITorchSessionManager>().AddFactory(_ => _senderFactory);
+        _senderFactory = new(this);
     }
 
     public override Sender getConsoleSender() => _senderFactory?.wrap(torch) ?? throw new InvalidOperationException("call setupSenderFactory first");
@@ -61,8 +61,7 @@ public class LpTorchPlugin(LuckPermsBootstrap bootstrap, ITorchBase torch) : Abs
 
     protected override void registerCommands()
     {
-        _commandManager = new LpCommandManager(this, _senderFactory!);
-        torch.Managers.GetManager<ITorchSessionManager>().AddFactory(_ => _commandManager);
+        _commandManager = new(this, _senderFactory!);
     }
 
     protected override void setupManagers()
@@ -71,16 +70,29 @@ public class LpTorchPlugin(LuckPermsBootstrap bootstrap, ITorchBase torch) : Abs
         _groupManager = new(this);
         _trackManager = new(this);
         _connectionListener = new(this);
-        torch.Managers.GetManager<ITorchSessionManager>().AddFactory(_ => _connectionListener);
-        torch.Managers.GetManager<ITorchSessionManager>().AddFactory(_ => new ModApiManager());
+        if (torch.CurrentSession is null)
+        {
+            torch.Managers.GetManager<ITorchSessionManager>().AddFactory(_ => _senderFactory);
+            torch.Managers.GetManager<ITorchSessionManager>().AddFactory(_ => _commandManager);
+            torch.Managers.GetManager<ITorchSessionManager>().AddFactory(_ => _connectionListener);
+            torch.Managers.GetManager<ITorchSessionManager>().AddFactory(_ => new ModApiManager());
+        }
+        else
+        {
+            _dependencyManager = new(torch.CurrentSession.Managers);
+            
+            _dependencyManager.AddManager(_senderFactory);
+            _dependencyManager.AddManager(_commandManager);
+            _dependencyManager.AddManager(_connectionListener);
+            _dependencyManager.AddManager(new ModApiManager());
+        }
     }
 
     protected override CalculatorFactory provideCalculatorFactory() => new LpCalculatorFactory(this);
 
     protected override void setupContextManager()
     {
-        _contextManager = new LpContextManager(this);
-        torch.Managers.GetManager<ITorchSessionManager>().AddFactory(_ => _contextManager);
+        _contextManager = new(this);
     }
 
     public override GroupManager getGroupManager() => _groupManager ?? throw new InvalidOperationException("call setupManagers first");
@@ -123,6 +135,23 @@ public class LpTorchPlugin(LuckPermsBootstrap bootstrap, ITorchBase torch) : Abs
         CommandPrefixPatch.Patch(context);
         
         patchManager.Commit();
+
+        if (_dependencyManager is null)
+        {
+            torch.Managers.GetManager<ITorchSessionManager>().AddFactory(_ => _contextManager);
+        }
+        else
+        {
+            _dependencyManager.AddManager(_contextManager);
+            
+            _dependencyManager.Attach();
+        }
+    }
+    
+    protected override void removePlatformHooks()
+    {
+        base.removePlatformHooks();
+        _dependencyManager?.Detach();
     }
 
     protected override AbstractEventBus provideEventBus(LuckPermsApiProvider luckPermsApiProvider) => new LpEventBus(this, luckPermsApiProvider, torch);

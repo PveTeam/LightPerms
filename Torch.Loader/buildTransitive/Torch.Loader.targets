@@ -1,0 +1,29 @@
+﻿<Project>
+    <Target Name="BuildArchive" AfterTargets="AfterBuild"
+            Condition="$(DesignTimeBuild) != true Or $(BuildingForLiveUnitTesting) == true">
+        <PropertyGroup>
+            <PluginBasePath>$(MSBuildThisFileDirectory)..\LuckPerms.Loader\$(BaseIntermediateOutputPath)$(Configuration)\$(TargetFramework)\</PluginBasePath>
+            <PluginZipPath>$(PluginBasePath)plugin.zip</PluginZipPath>
+            <PluginZipHashPath>$(PluginBasePath)plugin.zip.sha256</PluginZipHashPath>
+            <PluginNamePath>$(PluginBasePath)name.txt</PluginNamePath>
+            <PluginManifestPath>$(PluginBasePath)manifest.xml</PluginManifestPath>
+            <PluginOutputPath>$(ProjectDir)$(BaseOutputPath)$(Configuration)\plugin\</PluginOutputPath>
+        </PropertyGroup>
+        <MakeDir Directories="$(PluginBasePath)" ContinueOnError="true" />
+        <ZipDirectory DestinationFile="$(PluginZipPath)" SourceDirectory="$(OutputPath)" Overwrite="true" />
+        <GetFileHash Files="$(PluginZipPath)">
+            <Output TaskParameter="Hash"
+                    ItemName="PluginZipHash" />
+        </GetFileHash>
+        <WriteLinesToFile File="$(PluginZipHashPath)" Lines="@(PluginZipHash)" Overwrite="true" />
+        <WriteLinesToFile File="$(PluginNamePath)" Lines="$(AssemblyName)" Overwrite="true" />
+        <Copy SourceFiles="$(ProjectDir)manifest.xml" DestinationFiles="$(PluginManifestPath)" SkipUnchangedFiles="true" />
+        
+        <MSBuild Projects="$(MSBuildThisFileDirectory)..\LuckPerms.Loader\LuckPerms.Loader.csproj"
+                 Properties="AssemblyName=$(AssemblyName).Loader;OutputPath=$(PluginOutputPath);Configuration=$(Configuration);TargetFrameworkRootPath=$(TargetFrameworkRootPath)"
+                 Targets="Restore" />
+        <MSBuild Projects="$(MSBuildThisFileDirectory)..\LuckPerms.Loader\LuckPerms.Loader.csproj"
+                 Properties="AssemblyName=$(AssemblyName).Loader;OutputPath=$(PluginOutputPath);Configuration=$(Configuration);TargetFrameworkRootPath=$(TargetFrameworkRootPath)" />
+        <RemoveDir Directories="$(PluginOutputPath)obj" />
+    </Target>
+</Project>

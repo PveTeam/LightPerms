@@ -3,10 +3,13 @@ using System.IO;
 using java.lang;
 using java.util;
 using LuckPerms.Torch.Impl;
+using LuckPerms.Torch.PlatformApi;
 using NLog;
 using Sandbox;
 using Torch;
 using Torch.API;
+using Torch.API.Managers;
+using Torch.API.Session;
 using Exception = System.Exception;
 using Object = java.lang.Object;
 
@@ -23,58 +26,14 @@ public class Plugin : TorchPluginBase
     }
     
     public static readonly ILogger Log = LogManager.GetLogger("LuckPerms");
-    private LpTorchBootstrap? _bootstrap;
+    
 
     public override void Init(ITorchBase torch)
     {
         base.Init(torch);
-        Torch.GameStateChanged += TorchOnGameStateChanged;
-        _bootstrap = new((ITorchServer)Torch, this, Log, Path.Combine(StoragePath, "luckperms"));
-        
-        try
-        {
-            Log.Info("Initializing LuckPerms");
-            _bootstrap.Plugin.load();
-        }
-        catch (Exception e)
-        {
-            Log.Fatal(e);
-            throw;
-        }
-        finally
-        {
-            _bootstrap.LoadLatch.countDown();
-        }
-    }
 
-    private void TorchOnGameStateChanged(MySandboxGame game, TorchGameState newState)
-    {
-        if (_bootstrap is null)
-            throw new InvalidOperationException("Plugin is not initialized");
-        
-        switch (newState)
-        {
-            case TorchGameState.Loading:
-                try
-                {
-                    Log.Info("Loading LuckPerms");
-                    Thread.currentThread().setContextClassLoader(LpDependencyManager.CurrentClassLoader);
-                    _bootstrap.Plugin.enable();
-                }
-                catch (Exception e)
-                {
-                    Log.Fatal(e);
-                    throw;
-                }
-                finally
-                {
-                    _bootstrap.EnableLatch.countDown();
-                }
-                break;
-            case TorchGameState.Unloading:
-                Log.Info("Unloading LuckPerms");
-                _bootstrap.Plugin.disable();
-                break;
-        }
+        var platformManager = new LuckPermsPlatformManager(this, (ITorchServer)torch, Log);
+
+        Torch.Managers.GetManager<ITorchSessionManager>().AddFactory(_ => platformManager);
     }
 }

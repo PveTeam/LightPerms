@@ -21,7 +21,8 @@ public class ModApiManager : IManager
         MyScriptCompiler.Static.AddReferencedAssemblies(
             typeof(net.luckperms.api.LuckPerms).Assembly.Location, // net.luckperms.api.dll
             typeof(java.lang.Boolean).Assembly.Location, // IKVM.Java.dll
-            typeof(ModApiManager).Assembly.Location // LuckPerms.Torch.dll
+            typeof(ModApiManager).Assembly.Location, // LuckPerms.Torch.dll
+            typeof(ITorchBase).Assembly.Location // Torch.API.dll
         );
         
         using var whitelist = MyScriptCompiler.Static.Whitelist.OpenBatch();

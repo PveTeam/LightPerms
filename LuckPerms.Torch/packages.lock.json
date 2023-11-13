@@ -45,6 +45,12 @@
         "resolved": "1.13.2",
         "contentHash": "XwNhfkr7IeUiH8AE4pzob8YioxfL6nxgAx+fHEeWCObY/NZuBMfWLh39FznXbneKvagiqeeI7quIvZ6P1eVaEA=="
       },
+      "Torch.Loader": {
+        "type": "Direct",
+        "requested": "[1.0.0, )",
+        "resolved": "1.0.0",
+        "contentHash": "GAf9Mv1t1/qTGHSgDqkiKAc7Xbh36+U8Ce1PuSoJZNKxHVmzbKHc3nSVz0dIBHhLE7Op8k60NfmclDRAQAppbQ=="
+      },
       "Torch.Server.ReferenceAssemblies": {
         "type": "Direct",
         "requested": "[1.3.1.260-master, )",

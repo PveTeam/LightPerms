@@ -1,0 +1,5 @@
+﻿<Project>
+    <ItemGroup>
+        <MavenReference Include="net.luckperms:api" Version="5.4" />
+    </ItemGroup>
+</Project>

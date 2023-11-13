@@ -52,7 +52,7 @@ public class LpTorchBootstrap : LuckPermsBootstrap
     public Collection getPlayerList() => Sync.Players?.GetAllPlayers()
         .Select(b => Sync.Players.TryGetPlayerIdentity(b)?.DisplayName).Where(b => b is not null).ToCollection() ?? Collections.EMPTY_LIST;
 
-    public Platform.Type getType() => Platform.Type.STANDALONE; // meh
+    public Platform.Type getType() => Platform.Type.BUKKIT; // meh
 
     public SchedulerAdapter getScheduler() => _schedulerAdapter ??= new LpSchedulerAdapter(this, _torch);
 

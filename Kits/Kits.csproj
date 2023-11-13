@@ -1,0 +1,47 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net48</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <PlatformTarget>x64</PlatformTarget>
+        <LangVersion>10</LangVersion>
+        <UseWpf>true</UseWpf>
+    </PropertyGroup>
+
+    <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+        <DebugType>none</DebugType>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="LuckPerms.Torch.Api" Version="5.4.0" />
+        <PackageReference Include="PetaPoco.Compiled" Version="6.0.480" />
+        <PackageReference Include="PropertyChanged.Fody" Version="3.4.0" PrivateAssets="all" />
+        <PackageReference Include="Torch.Server.ReferenceAssemblies" Version="1.3.1.207-master" PrivateAssets="all" IncludeAssets="compile" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <None Update="manifest.xml">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="schema.xsd" />
+      <EmbeddedResource Include="schema.xsd" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Update="Views\EditButton.cs">
+        <DependentUpon>EditButton.xaml</DependentUpon>
+      </Compile>
+      <Compile Update="Views\ProperCollectionEditor.cs">
+        <DependentUpon>ProperCollectionEditor.xaml</DependentUpon>
+      </Compile>
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\heh\heh.csproj" />
+    </ItemGroup>
+
+</Project>

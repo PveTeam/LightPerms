@@ -24,6 +24,7 @@
           <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
         <PackageReference Include="torch.server.referenceassemblies" Version="1.3.1.260-master" PrivateAssets="all" IncludeAssets="compile" />
+        <PackageReference Include="Torch.Loader" Version="1.0.0" />
     </ItemGroup>
     
     <PropertyGroup>
@@ -100,9 +101,15 @@
         
         <MySqlPath>$(LibsPath)mysql-connector-j-8.0.33.jar</MySqlPath>
         <ProtobufPath>$(LibsPath)protobuf-java-3.21.9.jar</ProtobufPath>
+        
+        <SqlitePath>$(LibsPath)sqlite-jdbc-3.43.2.2.jar</SqlitePath>
     </PropertyGroup>
 
     <ItemGroup>
+        <IkvmReference Include="$(SqlitePath)">
+            <References>$(Slf4jApiPath)</References>
+        </IkvmReference>
+        
         <IkvmReference Include="$(MySqlPath)">
             <References>$(ProtobufPath)</References>
         </IkvmReference>
@@ -122,7 +129,7 @@
         </IkvmReference>
         <IkvmReference Include="$(JnaPath)" />
         
-        <IkvmReference Include="$(H2Path)" />
+        <!--<IkvmReference Include="$(H2Path)" />-->
         <IkvmReference Include="$(PostgreSqlPath)" />
         
         <IkvmReference Include="$(MongoDriverLegacyPath)">
@@ -234,21 +241,17 @@
         <IkvmReference Include="$(SnakeYamlPath)" />
         <IkvmReference Include="$(CheckerQualPath)" />
         
-        <IkvmReference Include="$(ApiJarPath)" />
+        <IkvmReference Include="$(ApiJarPath)">
+            <AssemblyName>api</AssemblyName>
+            <DisableAutoAssemblyName>true</DisableAutoAssemblyName>
+        </IkvmReference>
         <IkvmReference Include="$(CommonJarPath)">
-            <References>$(ApiJarPath);$(ConfigurateCorePath);$(ConfigurateGsonPath);$(ConfigurateHoconPath);$(ConfigurateYamlPath);$(SnakeYamlPath);$(CheckerQualPath);$(AdventureApiPath);$(AdventureKeyPath);$(AdventureTextPlainPath);$(AdventureTextLegacyPath);$(AdventureTextMinimessagePath);$(ExaminationApiPath);$(GuavaPath);$(GsonPath);$(ConfigurateTomlPath);$(BrigadierPath);$(EventApiPath);$(Slf4jApiPath);$(Log4jApiPath);$(CaffeinePath);$(OkHttpPath);$(OkioPath);$(ByteBuddyPath);$(JnatsPath);$(HikariCPPath);$(JedisPath);$(CommonsPoolPath);$(AmqpClientPath);$(BsonPath);$(MongoDriverCorePath);$(MongoDriverLegacyPath);$(MongoDriverSyncPath);$(PostgreSqlPath);$(H2Path);$(MariaDbPath);$(MySqlPath)</References>
+            <References>$(ApiJarPath);$(ConfigurateCorePath);$(ConfigurateGsonPath);$(ConfigurateHoconPath);$(ConfigurateYamlPath);$(SnakeYamlPath);$(CheckerQualPath);$(AdventureApiPath);$(AdventureKeyPath);$(AdventureTextPlainPath);$(AdventureTextLegacyPath);$(AdventureTextMinimessagePath);$(ExaminationApiPath);$(GuavaPath);$(GsonPath);$(ConfigurateTomlPath);$(BrigadierPath);$(EventApiPath);$(Slf4jApiPath);$(Log4jApiPath);$(CaffeinePath);$(OkHttpPath);$(OkioPath);$(ByteBuddyPath);$(JnatsPath);$(HikariCPPath);$(JedisPath);$(CommonsPoolPath);$(AmqpClientPath);$(BsonPath);$(MongoDriverCorePath);$(MongoDriverLegacyPath);$(MongoDriverSyncPath);$(PostgreSqlPath);$(MariaDbPath);$(MySqlPath);$(SqlitePath)</References>
         </IkvmReference>
     </ItemGroup>
 
     <ItemGroup>
-        <Content Include="manifest.xml">
-            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-            <CopyToPublishDirectory>Always</CopyToPublishDirectory>
-        </Content>
-    </ItemGroup>
-
-    <ItemGroup>
-      <EmbeddedResource Include="Resources\schema\h2.sql" LogicalName="me.lucko.luckperms.schema.h2.sql" />
+      <!--<EmbeddedResource Include="Resources\schema\h2.sql" LogicalName="me.lucko.luckperms.schema.h2.sql" />-->
       <EmbeddedResource Include="Resources\schema\mariadb.sql" LogicalName="me.lucko.luckperms.schema.mariadb.sql" />
       <EmbeddedResource Include="Resources\schema\mysql.sql" LogicalName="me.lucko.luckperms.schema.mysql.sql" />
       <EmbeddedResource Include="Resources\schema\postgresql.sql" LogicalName="me.lucko.luckperms.schema.postgresql.sql" />

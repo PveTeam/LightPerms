@@ -58,7 +58,6 @@ server: global
 #   |=> MongoDB
 #
 #   |  Flatfile/local database - don't require any extra configuration
-#   |=> H2 (preferred over SQLite)
 #   |=> SQLite
 #
 #   |  Readable & editable text files - don't require any extra configuration
@@ -71,9 +70,9 @@ server: global
 #   | and all stored in the same file by switching to a combined storage variant.
 #   | Just add '-combined' to the end of the storage-method, e.g. 'yaml-combined'
 #
-# - A H2 database is the default option.
+# - A SQLite database is the default option.
 # - If you want to edit data manually in "traditional" storage files, we suggest using YAML.
-storage-method: h2
+storage-method: sqlite
 
 # The following block defines the settings for remote database storage methods.
 #

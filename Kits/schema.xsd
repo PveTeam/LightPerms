@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="Config" nillable="true" type="Config" />
+  <xs:complexType name="Config">
+    <xs:complexContent mixed="false">
+      <xs:extension base="ViewModel">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" name="Kits" type="ArrayOfKitViewModel" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="ViewModel" abstract="true" />
+  <xs:complexType name="DefinitionId">
+    <xs:complexContent mixed="false">
+      <xs:extension base="ViewModel">
+        <xs:attribute name="TypeId" type="xs:string" />
+        <xs:attribute name="SubtypeId" type="xs:string" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="KitItemViewModel">
+    <xs:complexContent mixed="false">
+      <xs:extension base="ViewModel">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" name="Id" type="DefinitionId" />
+          <xs:element minOccurs="1" maxOccurs="1" name="Probability" type="xs:float" />
+          <xs:element minOccurs="1" maxOccurs="1" name="Amount" type="xs:float" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="KitViewModel">
+    <xs:complexContent mixed="false">
+      <xs:extension base="ViewModel">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="1" name="UseCost" type="xs:long" />
+          <xs:element minOccurs="0" maxOccurs="1" name="UseCooldownMinutes" type="xs:unsignedLong" />
+          <xs:element minOccurs="0" maxOccurs="1" name="RequiredPromoteLevel" type="MyPromoteLevel" />
+          <xs:element minOccurs="0" maxOccurs="1" name="LpPermission" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" name="RespawnPodWildcards" type="ArrayOfString" />
+          <xs:element minOccurs="1" maxOccurs="1" name="Items" type="ArrayOfKitItemViewModel" />
+        </xs:sequence>
+        <xs:attribute name="Name" type="xs:string" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:simpleType name="MyPromoteLevel">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="None" />
+      <xs:enumeration value="Scripter" />
+      <xs:enumeration value="Moderator" />
+      <xs:enumeration value="SpaceMaster" />
+      <xs:enumeration value="Admin" />
+      <xs:enumeration value="Owner" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="ArrayOfString">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="string" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ArrayOfKitItemViewModel">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Item" nillable="true" type="KitItemViewModel" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ArrayOfKitViewModel">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Kit" nillable="true" type="KitViewModel" />
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>
