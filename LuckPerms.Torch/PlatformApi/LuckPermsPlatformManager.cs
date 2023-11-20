@@ -1,18 +1,21 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using java.lang;
+using LuckPerms.Torch.Api.Managers;
 using LuckPerms.Torch.Impl;
 using NLog;
 using Torch;
 using Torch.API;
-using Torch.API.Managers;
 using Exception = System.Exception;
 
 namespace LuckPerms.Torch.PlatformApi;
 
-public class LuckPermsPlatformManager : IManager
+public class LuckPermsPlatformManager : ILuckPermsPlatformManager
 {
     private readonly ILogger _log = LogManager.GetCurrentClassLogger();
     private readonly LpTorchBootstrap _bootstrap;
+
+    public net.luckperms.api.LuckPerms Api => _bootstrap.EnableLatch.getCount() == 0 ? _bootstrap.Plugin.getApiProvider() : throw new InvalidOperationException("Api is not initialized");
     
     public LuckPermsPlatformManager(TorchPluginBase plugin, ITorchServer server, ILogger log)
     {

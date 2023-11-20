@@ -1,4 +1,5 @@
-﻿using LuckPerms.Torch.Impl;
+﻿using LuckPerms.Torch.Api;
+using LuckPerms.Torch.Impl;
 using me.lucko.luckperms.common.context.manager;
 using me.lucko.luckperms.common.model;
 using me.lucko.luckperms.common.verbose.@event;
@@ -8,7 +9,7 @@ using Torch.ViewModels;
 
 namespace LuckPerms.Torch.PlatformApi;
 
-public class LpPlayerModel(ulong steamId, string? name = null) : PlayerViewModel(steamId, name)
+public class LpPlayerModel(ulong steamId, string? name = null) : PlayerViewModel(steamId, name), ILpPlayerModel
 {
     public QueryOptionsCache? QueryOptionsCache { get; private set; }
     public User? LpUser { get; private set; }

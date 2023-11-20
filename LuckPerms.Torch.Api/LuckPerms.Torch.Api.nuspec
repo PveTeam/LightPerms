@@ -2,13 +2,13 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
     <metadata>
         <id>LuckPerms.Torch.Api</id>
-        <version>5.4</version>
+        <version>5.4.1</version>
         <authors>LuckPerms.Torch.Api</authors>
         <description>Package Description</description>
         <dependencies>
             <group targetFramework=".NETFramework4.8">
                 <dependency id="Torch.Loader" version="1.0.0" />
-                <dependency id="LuckPerms.Torch.Utils" version="1.0.0" />
+                <dependency id="LuckPerms.Torch.Utils" version="1.0.1" />
                 <dependency id="IKVM.Maven.Sdk" version="1.6.1" />
             </group>
         </dependencies>

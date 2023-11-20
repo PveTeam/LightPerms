@@ -2,26 +2,28 @@
 
     <PropertyGroup>
         <TargetFramework>net48</TargetFramework>
+        <RootNamespace>LuckPerms.Torch</RootNamespace>
         <LangVersion>12</LangVersion>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
-        <Version>1.0.0</Version>
+        <Version>1.0.1</Version>
     </PropertyGroup>
-    
+
     <PropertyGroup>
         <LibsPath>$(ProjectDir)libs\</LibsPath>
         <ApiJarPath>$(LibsPath)api-5.4.jar</ApiJarPath>
     </PropertyGroup>
-    
+
     <ItemGroup>
         <IkvmReference Include="$(ApiJarPath)">
             <AssemblyName>api</AssemblyName>
             <DisableAutoAssemblyName>true</DisableAutoAssemblyName>
         </IkvmReference>
     </ItemGroup>
-    
+
     <ItemGroup>
-      <PackageReference Include="IKVM" Version="8.7.1" />
+        <PackageReference Include="IKVM" Version="8.7.1" />
+        <PackageReference Include="torch.server.referenceassemblies" Version="1.3.1.260-master" PrivateAssets="all" IncludeAssets="compile" />
     </ItemGroup>
 
 </Project>

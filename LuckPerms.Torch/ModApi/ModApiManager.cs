@@ -4,6 +4,8 @@ using System.Linq;
 using ikvm.extensions;
 using ikvm.runtime;
 using java.lang;
+using LuckPerms.Torch.Api;
+using LuckPerms.Torch.Api.Managers;
 using LuckPerms.Torch.Extensions;
 using LuckPerms.Torch.Utils.Extensions;
 using Torch.API;
@@ -22,7 +24,7 @@ public class ModApiManager : IManager
         MyScriptCompiler.Static.AddReferencedAssemblies(
             typeof(net.luckperms.api.LuckPerms).Assembly.Location, // net.luckperms.api.dll
             typeof(java.lang.Boolean).Assembly.Location, // IKVM.Java.dll
-            typeof(ModApiManager).Assembly.Location, // LuckPerms.Torch.dll
+            typeof(ILuckPermsPlatformManager).Assembly.Location, // LuckPerms.Torch.Utils.dll
             typeof(ITorchBase).Assembly.Location // Torch.API.dll
         );
         
@@ -48,7 +50,7 @@ public class ModApiManager : IManager
         whitelist.AllowNamespaceOfTypes(MyWhitelistTarget.ModApi, typeof(UuidExtensions));
         whitelist.AllowTypes(MyWhitelistTarget.ModApi, typeof(TorchApi), typeof(IDependencyProvider), typeof(IManager),
             typeof(DependencyProviderExtensions), typeof(IMultiplayerManagerServer), typeof(IMultiplayerManagerBase),
-            typeof(IPlayer), typeof(ConnectionState));
+            typeof(IPlayer), typeof(ConnectionState), typeof(ILpPlayerModel));
     }
 
     public void Detach()
