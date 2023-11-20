@@ -259,4 +259,8 @@
       <EmbeddedResource Include="Resources\config.yml" LogicalName="config.yml" />
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\LuckPerms.Torch.Utils\LuckPerms.Torch.Utils.csproj" />
+    </ItemGroup>
+
 </Project>

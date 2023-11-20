@@ -5,6 +5,7 @@ using ikvm.extensions;
 using ikvm.runtime;
 using java.lang;
 using LuckPerms.Torch.Extensions;
+using LuckPerms.Torch.Utils.Extensions;
 using Torch.API;
 using Torch.API.Managers;
 using VRage.Scripting;

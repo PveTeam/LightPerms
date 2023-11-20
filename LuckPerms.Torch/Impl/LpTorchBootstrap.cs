@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Linq;
 using java.io;
 using java.lang;
@@ -7,6 +8,7 @@ using java.time;
 using java.util;
 using java.util.concurrent;
 using LuckPerms.Torch.Extensions;
+using LuckPerms.Torch.Utils.Extensions;
 using me.lucko.luckperms.common.plugin.bootstrap;
 using me.lucko.luckperms.common.plugin.classpath;
 using me.lucko.luckperms.common.plugin.logging;
@@ -18,6 +20,7 @@ using Torch.API;
 using Torch.API.Managers;
 using Torch.API.Plugins;
 using Torch.Server.Managers;
+using Path = java.nio.file.Path;
 
 namespace LuckPerms.Torch.Impl;
 
@@ -30,8 +33,9 @@ public class LpTorchBootstrap : LuckPermsBootstrap
     public CountDownLatch EnableLatch { get; } = new(1);
     private readonly ITorchServer _torch;
     private readonly ITorchPlugin _torchPlugin;
-    private readonly string _configDir;
-    
+    private readonly Path _configDir;
+    private readonly Path _dataDir;
+
     public LpTorchPlugin Plugin { get; }
 
     public LpTorchBootstrap(ITorchServer torch, ITorchPlugin torchPlugin, ILogger logger, string configDir)
@@ -39,13 +43,15 @@ public class LpTorchBootstrap : LuckPermsBootstrap
         _pluginLogger = new NLogPluginLogger(logger);
         _torch = torch;
         _torchPlugin = torchPlugin;
-        _configDir = configDir;
+        var configDirInfo = Directory.CreateDirectory(configDir);
+        _configDir = Paths.get(configDirInfo.FullName);
+        _dataDir = Paths.get(configDirInfo.CreateSubdirectory("data").FullName);
         Plugin = new(this, torch);
     }
 
     public ITorchPlugin GetTorchPlugin() => _torchPlugin;
 
-    public Path getDataDirectory() => Paths.get(_configDir, "data");
+    public Path getDataDirectory() => _dataDir;
 
     public string identifyClassLoader(ClassLoader classLoader) => classLoader.toString();
 
@@ -56,7 +62,7 @@ public class LpTorchBootstrap : LuckPermsBootstrap
 
     public SchedulerAdapter getScheduler() => _schedulerAdapter ??= new LpSchedulerAdapter(this, _torch);
 
-    public Path getConfigDirectory() => Paths.get(_configDir);
+    public Path getConfigDirectory() => _configDir;
 
     public bool isPlayerOnline(UUID uuid) =>
         _torch.CurrentSession?.Managers.GetManager<MultiplayerManagerDedicated>().Players

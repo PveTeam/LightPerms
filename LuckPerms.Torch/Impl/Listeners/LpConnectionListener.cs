@@ -1,5 +1,6 @@
 ﻿using LuckPerms.Torch.Extensions;
 using LuckPerms.Torch.PlatformApi;
+using LuckPerms.Torch.Utils.Extensions;
 using me.lucko.luckperms.common.plugin;
 using me.lucko.luckperms.common.plugin.util;
 using Torch.API;

@@ -1,0 +1,27 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net48</TargetFramework>
+        <LangVersion>12</LangVersion>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <Version>1.0.0</Version>
+    </PropertyGroup>
+    
+    <PropertyGroup>
+        <LibsPath>$(ProjectDir)libs\</LibsPath>
+        <ApiJarPath>$(LibsPath)api-5.4.jar</ApiJarPath>
+    </PropertyGroup>
+    
+    <ItemGroup>
+        <IkvmReference Include="$(ApiJarPath)">
+            <AssemblyName>api</AssemblyName>
+            <DisableAutoAssemblyName>true</DisableAutoAssemblyName>
+        </IkvmReference>
+    </ItemGroup>
+    
+    <ItemGroup>
+      <PackageReference Include="IKVM" Version="8.7.1" />
+    </ItemGroup>
+
+</Project>

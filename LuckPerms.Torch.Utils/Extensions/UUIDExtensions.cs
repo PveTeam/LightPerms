@@ -1,6 +1,6 @@
 ﻿using java.util;
 
-namespace LuckPerms.Torch.Extensions;
+namespace LuckPerms.Torch.Utils.Extensions;
 
 public static class UuidExtensions
 {

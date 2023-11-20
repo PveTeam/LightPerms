@@ -1,8 +1,6 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using java.util;
+﻿using java.util;
 
-namespace LuckPerms.Torch.Extensions;
+namespace LuckPerms.Torch.Utils.Extensions;
 
 public static class EnumerableExtensions
 {
