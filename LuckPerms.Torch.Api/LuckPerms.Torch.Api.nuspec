@@ -8,6 +8,7 @@
         <dependencies>
             <group targetFramework=".NETFramework4.8">
                 <dependency id="Torch.Loader" version="1.0.0" />
+                <dependency id="LuckPerms.Torch.Utils" version="1.0.0" />
                 <dependency id="IKVM.Maven.Sdk" version="1.6.1" />
             </group>
         </dependencies>

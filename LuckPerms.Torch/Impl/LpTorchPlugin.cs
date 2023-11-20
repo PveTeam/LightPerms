@@ -8,6 +8,7 @@ using LuckPerms.Torch.Impl.Listeners;
 using LuckPerms.Torch.Impl.Messaging;
 using LuckPerms.Torch.ModApi;
 using LuckPerms.Torch.PlatformHooks;
+using LuckPerms.Torch.Utils.Extensions;
 using me.lucko.luckperms.common.api;
 using me.lucko.luckperms.common.calculator;
 using me.lucko.luckperms.common.command;

@@ -1,0 +1,32 @@
+﻿# Enables maintenance mode.
+maintenance-enabled: false
+
+# Any extra commands inside the arrays will be executed when maintenance is enabled/disabled.
+# Example: commands-on-maintenance-enable: ["say hello!", "stop"]
+commands-on-maintenance-enable: []
+commands-on-maintenance-disable: []
+
+# If set to true, the world name for the servers list from this pool will be chosen.
+# If you put in multiple entries, one of them will be chosen randomly on every ping.
+# If running an endtimer, the time left can be displayed by including {duration} in the message. 
+# Additionally you can set custom timestamp format with {duration:hh\\:mm\\:\\ss}. See all available formats at https://learn.microsoft.com/en-us/dotnet/standard/base-types/custom-timespan-format-strings 
+enable-world-message: true
+world-message: 
+#  - "[MAINTENANCE]"
+# - "Back in {duration:hh\\:mm}"
+
+# Set this to false if you do not want players to be kicked when you enable maintenance (new connections will still be blocked).
+# ... I don't know why you would want that, but you can disable it. :p
+kick-online-players: true
+
+# Changes the language of command feedback/messages.
+# If you find missing translations or want to contribute a new language file, you are very welcome to message me on my Discord server! :)
+# Currently available are: en (English)
+language: en
+
+# If enabled and the server is restarted while running an endtimer, the timer will be continued after the restart.
+# If the timer ends while the server is offline, maintenance will be disabled as soon as the server starts again.
+continue-endtimer-after-restart: true
+
+# If using the timer command: In what intervals before enabling/disabling maintenance there will be a broadcast.
+timer-broadcast-for-seconds: [1200, 900, 600, 300, 120, 60, 30, 20, 10, 5, 4, 3, 2, 1]

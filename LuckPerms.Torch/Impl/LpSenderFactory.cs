@@ -1,5 +1,6 @@
 ﻿using java.util;
 using LuckPerms.Torch.Extensions;
+using LuckPerms.Torch.Utils.Extensions;
 using me.lucko.luckperms.common.locale;
 using me.lucko.luckperms.common.plugin;
 using me.lucko.luckperms.common.sender;

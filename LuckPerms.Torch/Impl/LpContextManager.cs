@@ -2,6 +2,7 @@
 using java.util;
 using LuckPerms.Torch.Extensions;
 using LuckPerms.Torch.PlatformApi;
+using LuckPerms.Torch.Utils.Extensions;
 using me.lucko.luckperms.common.config;
 using me.lucko.luckperms.common.context.manager;
 using me.lucko.luckperms.common.plugin;
