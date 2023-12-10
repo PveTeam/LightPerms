@@ -17,9 +17,9 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="IKVM" Version="8.7.1" />
+        <PackageReference Include="IKVM" Version="8.7.3" />
         <PackageReference Include="Lib.Harmony" Version="2.3.0-prerelease.2" />
-        <PackageReference Include="PolySharp" Version="1.13.2">
+        <PackageReference Include="PolySharp" Version="1.14.0">
           <PrivateAssets>all</PrivateAssets>
           <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
