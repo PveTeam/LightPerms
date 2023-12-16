@@ -10,19 +10,19 @@ public static class DelegateExtensions
 {
     private static readonly Func<Consumer, Consumer, Consumer> AndThenDefault =
         (Func<Consumer, Consumer, Consumer>)typeof(Consumer).GetMethod("<default>andThen",
-            BindingFlags.Static | BindingFlags.NonPublic)!.CreateDelegate(typeof(Func<Consumer, Consumer, Consumer>));
+            BindingFlags.Static | BindingFlags.Public)!.CreateDelegate(typeof(Func<Consumer, Consumer, Consumer>));
     
     private static readonly Func<Predicate, Predicate, Predicate> AndDefault =
         (Func<Predicate, Predicate, Predicate>)typeof(Predicate).GetMethod("<default>and",
-            BindingFlags.Static | BindingFlags.NonPublic)!.CreateDelegate(typeof(Func<Predicate, Predicate, Predicate>));
+            BindingFlags.Static | BindingFlags.Public)!.CreateDelegate(typeof(Func<Predicate, Predicate, Predicate>));
     
     private static readonly Func<Predicate, Predicate> NegateDefault =
         (Func<Predicate, Predicate>)typeof(Predicate).GetMethod("<default>negate",
-            BindingFlags.Static | BindingFlags.NonPublic)!.CreateDelegate(typeof(Func<Predicate, Predicate>));
+            BindingFlags.Static | BindingFlags.Public)!.CreateDelegate(typeof(Func<Predicate, Predicate>));
     
     private static readonly Func<Predicate, Predicate, Predicate> OrDefault =
         (Func<Predicate, Predicate, Predicate>)typeof(Predicate).GetMethod("<default>or",
-            BindingFlags.Static | BindingFlags.NonPublic)!.CreateDelegate(typeof(Func<Predicate, Predicate, Predicate>));
+            BindingFlags.Static | BindingFlags.Public)!.CreateDelegate(typeof(Func<Predicate, Predicate, Predicate>));
     
     public static Runnable ToRunnable(this Action action) => new DelegateRunnable(action);
     

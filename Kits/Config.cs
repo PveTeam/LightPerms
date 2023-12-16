@@ -16,5 +16,5 @@ public class Config : ViewModel
 
     [XmlAttribute(Form = XmlSchemaForm.Qualified, Namespace = "http://www.w3.org/2001/XMLSchema-instance")]
     // ReSharper disable once InconsistentNaming
-    public string noNamespaceSchemaLocation = "Kits.v1.1.0.xsd";
+    public string noNamespaceSchemaLocation = "Kits.v1.1.2.xsd";
 }

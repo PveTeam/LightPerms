@@ -68,7 +68,12 @@ public class LpTorchBootstrap : LuckPermsBootstrap
         _torch.CurrentSession?.Managers.GetManager<MultiplayerManagerDedicated>().Players
             .ContainsKey(uuid.GetSteamId()) ?? false;
 
-    public string getVersion() => _torchPlugin.Version.TrimStart('v');
+    public string getVersion()
+    {
+        // has to be 3 component for web editor to work
+        var version = Version.Parse(_torchPlugin.Version.TrimStart('v'));
+        return $"{version.Major}.{version.Minor}.{version.Build}";
+    }
 
     public string getServerBrand() => "Torch";
 

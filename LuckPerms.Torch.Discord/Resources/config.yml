@@ -1,0 +1,16 @@
+# Discord API used for interacting with discord:
+# Available integrations:
+# internal (Using internal discord api manager, you must provide bot token down below)
+# sedb (Using SE-DiscordBridge plugin from Bishbash777 https://torchapi.com/plugins/view/3cd3ba7f-c47c-4efe-8cf1-bd3f618f5b9c)
+discord-api-mode: internal
+
+# Configuration options for discord api manager (regardless of discord-api-mode):
+discord-api:
+#  Id of a discord server where the plugin will work
+#  main-guild-id: 12345
+
+# Configuration options for internal discord api manager (if discord-api-mode is set to internal):
+internal-discord-api:
+#  Discord bot token (can be obtained from https://discord.com/developers/applications) make sure to enable ALL intents
+#  token: token here
+  

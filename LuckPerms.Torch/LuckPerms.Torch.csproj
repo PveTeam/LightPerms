@@ -210,13 +210,13 @@
             <References>$(ExaminationApiPath);$(ExaminationStringPath);$(AdventureKeyPath);$(AnnotationsPath)</References>
         </IkvmReference>
         <IkvmReference Include="$(AdventureTextPlainPath)">
-            <References>$(AdventureApiPath);$(AnnotationsPath);$(ExaminationApiPath)</References>
+            <References>$(AdventureApiPath);$(AnnotationsPath);$(ExaminationApiPath);$(AdventureKeyPath)</References>
         </IkvmReference>
         <IkvmReference Include="$(AdventureTextLegacyPath)">
-            <References>$(AdventureApiPath);$(ExaminationApiPath)</References>
+            <References>$(AdventureApiPath);$(ExaminationApiPath);$(AdventureKeyPath)</References>
         </IkvmReference>
         <IkvmReference Include="$(AdventureTextMinimessagePath)">
-            <References>$(AdventureApiPath);$(ExaminationApiPath)</References>
+            <References>$(AdventureApiPath);$(ExaminationApiPath);$(AdventureKeyPath)</References>
         </IkvmReference>
         
         <IkvmReference Include="$(Toml4jPath)">
