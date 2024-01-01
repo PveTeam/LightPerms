@@ -30,26 +30,48 @@ namespace Maintenance.Patches;
 public static class SteamQueryPatch
 {
     private static readonly ILogger Log = LogManager.GetCurrentClassLogger();
+
+    [ReflectedSetter(Name = "Running", TypeName = "VRage.Steam.MySteamGameServer, VRage.Steam")]
+    private static readonly Action<IMyGameServer, bool> RunningSetter = null!;
     
     [ReflectedMethodInfo(null, "SteamServerEntryPoint", TypeName = "VRage.Steam.MySteamGameServer, VRage.Steam")]
     private static readonly MethodInfo EntryPointMethod = null!;
 
-    [ReflectedMethodInfo(typeof(SteamQueryPatch), nameof(Prefix))]
-    private static readonly MethodInfo PrefixMethod = null!;
+    [ReflectedMethodInfo(typeof(SteamQueryPatch), nameof(EntryPointPrefix))]
+    private static readonly MethodInfo EntryPointPrefixMethod = null!;
+    
+    [ReflectedMethodInfo(null, "Shutdown", TypeName = "VRage.Steam.MySteamGameServer, VRage.Steam")]
+    private static readonly MethodInfo ShutdownMethod = null!;
+
+    [ReflectedMethodInfo(typeof(SteamQueryPatch), nameof(ShutdownPrefix))]
+    private static readonly MethodInfo ShutdownPrefixMethod = null!;
 
 #pragma warning disable CS0618 // Type or member is obsolete
     private static ITorchBase Torch => TorchBase.Instance;
 #pragma warning restore CS0618 // Type or member is obsolete
+    
+    private static readonly ManualResetEventSlim ExitEvent = new(false);
     
     private static bool MaintenanceEnabled =>
         Torch.CurrentSession?.Managers.GetManager<MaintenanceManager>().MaintenanceEnabled is true;
 
     public static void Patch(PatchContext context)
     {
-        context.GetPattern(EntryPointMethod).Prefixes.Add(PrefixMethod);
+        context.GetPattern(EntryPointMethod).Prefixes.Add(EntryPointPrefixMethod);
+        context.GetPattern(ShutdownMethod).Prefixes.Add(ShutdownPrefixMethod);
+    }
+
+    private static bool ShutdownPrefix(IMyGameServer __instance, Thread __field_m_serverThread)
+    {
+        if (!__instance.Running) return false;
+        
+        RunningSetter(__instance, false);
+        ExitEvent.Wait();
+
+        return false;
     }
     
-    private static bool Prefix(IMyGameServer __instance, object argument)
+    private static bool EntryPointPrefix(IMyGameServer __instance, object argument)
     {
         var socket = (Socket)argument;
         RunServerAsync(__instance, socket);
@@ -142,6 +164,11 @@ public static class SteamQueryPatch
                 await socket.SendToAsync(new(buffer, 0, length), SocketFlags.None, remoteEndPoint);
             }
         }
+        
+        socket.Dispose();
+        GameServer.Shutdown();
+        
+        ExitEvent.Set();
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]

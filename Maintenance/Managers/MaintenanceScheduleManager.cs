@@ -2,6 +2,7 @@
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using Microsoft.Extensions.Configuration;
+using NLog;
 using Torch.API.Managers;
 using Torch.Managers;
 
@@ -9,6 +10,8 @@ namespace Maintenance.Managers;
 
 public class MaintenanceScheduleManager(string storagePath) : IManager
 {
+    private static readonly ILogger Log = LogManager.GetCurrentClassLogger();
+    
     [Manager.Dependency]
     private readonly MaintenanceManager _maintenanceManager = null!;
     
@@ -64,7 +67,23 @@ public class MaintenanceScheduleManager(string storagePath) : IManager
     private async void Scheduler()
     {
         var token = _cancellationTokenSource.Token;
-        
+
+        try
+        {
+            await SchedulerLoop(token);
+        }
+        catch (OperationCanceledException)
+        {
+            Log.Info("Maintenance scheduler loop was cancelled");
+        }
+        catch (Exception e)
+        {
+            Log.Fatal(e, "Exception in maintenance scheduler loop. Shutting down the scheduler.");
+        }
+    }
+
+    private async Task SchedulerLoop(CancellationToken token)
+    {
         var timerSecondsSection = _configManager.Configuration.GetSection(ConfigKeys.TimerBroadcastForSeconds);
         var timerSeconds = timerSecondsSection.GetChildren().Select(b => b.Get<int>()).ToArray();
 
