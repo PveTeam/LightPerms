@@ -1,0 +1,16 @@
+﻿nexusSync: false
+
+limitGridsPcu: false
+
+largeGridPcu: 16000
+smallGridPcu: 6000
+
+limitGroups:
+#  - name: Production
+#    handler: PerPlayer
+#    max: 6
+#    items:
+#      - Refinery
+#      - Assembler
+#      - RefineryIndustrial
+#      - AssemblerIndustrial
