@@ -9,6 +9,9 @@ limitGridsPcu: false
 largeGridPcu: 16000
 smallGridPcu: 6000
 
+# if set to true, each block in projection will cost 1 PCU toward grid having the projector block (default game behavior)
+countProjectionPcu: true
+
 # name - the display name of the limit group
 # handler - the handler of the limit group
 #  PerPlayer - the limit is applied per player and shows like the original game limits

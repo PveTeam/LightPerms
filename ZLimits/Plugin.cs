@@ -1,6 +1,8 @@
 ﻿using System.IO;
 using Torch;
 using Torch.API;
+using Torch.API.Managers;
+using Torch.API.Session;
 using ZLimits.Managers;
 
 namespace ZLimits;
@@ -13,5 +15,9 @@ public class Plugin : TorchPluginBase
 
         torch.Managers.AddManager(new ConfigManager(storagePath));
         torch.Managers.AddManager(new LimitsManager(torch));
+        
+        var sessionManager = torch.Managers.GetManager<ITorchSessionManager>();
+
+        sessionManager.AddFactory(_ => new ProjectionPatchManager());
     }
 }
