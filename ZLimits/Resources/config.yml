@@ -1,10 +1,22 @@
-﻿nexusSync: false
+﻿# if true, will sync built count of limited blocks across all nexus sectors
+# note: currently is not tested and will not work
+nexusSync: false
 
+# true if you want to limit maximum PCU per grid
 limitGridsPcu: false
 
+# maximum PCU per grid type (if limitGridsPcu is true)
 largeGridPcu: 16000
 smallGridPcu: 6000
 
+# name - the display name of the limit group
+# handler - the handler of the limit group
+#  PerPlayer - the limit is applied per player and shows like the original game limits
+#  PerGrid - the limit is applied per grid and can be checked by !limits grid
+#  PerFaction - the limit is applied per faction and shows like the original game limits but same numbers for all faction members
+#  note: additional handlers can be added in the future or via plugin API
+# max - the maximum limit of blocks that can be placed
+# items - the list of blocks that will count towards the limit group (block pair name, same as original game limits)
 limitGroups:
 #  - name: Production
 #    handler: PerPlayer
