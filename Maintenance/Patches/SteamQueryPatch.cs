@@ -53,7 +53,7 @@ public static class SteamQueryPatch
     private static readonly ManualResetEventSlim ExitEvent = new(false);
     
     private static bool MaintenanceEnabled =>
-        Torch.CurrentSession?.Managers.GetManager<MaintenanceManager>().MaintenanceEnabled is true;
+        Torch.CurrentSession?.Managers?.GetManager<MaintenanceManager>()?.MaintenanceEnabled is true;
 
     public static void Patch(PatchContext context)
     {

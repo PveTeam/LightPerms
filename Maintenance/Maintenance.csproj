@@ -9,6 +9,7 @@
         <UseWpf>true</UseWpf>
         <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
         <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+        <RestoreAdditionalProjectSources>https://nuget.storage.yandexcloud.net/index.json</RestoreAdditionalProjectSources>
     </PropertyGroup>
 
     <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
