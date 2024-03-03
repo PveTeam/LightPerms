@@ -9,8 +9,35 @@ discord-api:
 #  Id of a discord server where the plugin will work
 #  main-guild-id: 12345
 
+# Mirroring of global chat to specific discord channel and vise versa
+  global-chat-mirroring:
+    enabled: false
+
+#   Id of a discord channel to mirror global chat to
+    channel-id: 12345
+
+#   Format to use for ingame author 
+#   {0} gets replaced with global or server nickname (depends on what user has set)
+    ingame-author-format: "[D] {0}"
+#   Hex Color to use for ingame author
+    ingame-author-color: "#FFFFFF"
+
+#   Format to use for discord message
+#   {0} gets replaced with player name
+#   {1} gets replaced with message
+    discord-message-format: "**{0}**: {1}"
+#   Whether to allow mentions in messaging from ingame or not (USE WITH CAUTION)
+    discord-message-allow-mentions: false
+
+# Execute commands directly from discord via /eval command
+# WARNING: Configure proper command permissions in discord server settings
+  command-executor:
+    enabled: false
+
+#   Command name to register (in case you have multiple of them)
+    command-name: eval
+
 # Configuration options for internal discord api manager (if discord-api-mode is set to internal):
 internal-discord-api:
 #  Discord bot token (can be obtained from https://discord.com/developers/applications) make sure to enable ALL intents
 #  token: token here
-  

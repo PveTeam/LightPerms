@@ -2,5 +2,5 @@
 <PluginManifest xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <Name>LuckPerms.Torch.Discord</Name>
     <Guid>8E87A61E-A243-4227-88DD-AD3E2ECD9D62</Guid>
-    <Version>v1.0.0</Version>
+    <Version>v1.1.0</Version>
 </PluginManifest>

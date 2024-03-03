@@ -1,3 +1,4 @@
+using LuckPerms.Torch.Discord.Config;
 using LuckPerms.Torch.Discord.Managers;
 using LuckPerms.Torch.Discord.Utils;
 using Microsoft.Extensions.Configuration;
@@ -5,11 +6,14 @@ using Torch;
 using Torch.API;
 using Torch.API.Managers;
 using Torch.API.Session;
+using Torch.Managers;
 
 namespace LuckPerms.Torch.Discord;
 
 public class Plugin : TorchPluginBase
 {
+    private static readonly Guid LuckPermsGuid = new("7E4B3CC8-64FA-416E-8910-AACDF2DA5E2C");
+
     public override void Init(ITorchBase torch)
     {
         var storagePath = Directory.CreateDirectory(Path.Combine(StoragePath, "luckperms.discord")).FullName;
@@ -19,7 +23,35 @@ public class Plugin : TorchPluginBase
 
         var sessionManager = torch.Managers.GetManager<ITorchSessionManager>();
 
-        sessionManager.AddFactory(_ => new LuckPermsCalculatorManager());
+        if (torch.Managers.GetManager<PluginManager>().Plugins.ContainsKey(LuckPermsGuid))
+        {
+            sessionManager.AddFactory(_ => new LuckPermsCalculatorManager());
+            sessionManager.AddFactory(_ => new InternalLinkManager(this));
+        }
+
+        sessionManager.AddFactory(s =>
+        {
+            var globalChatConfig = new GlobalChatMirroringConfig(configManager.Configuration.GetRequiredSection("discord-api:global-chat-mirroring"));
+
+            if (globalChatConfig is not null && configManager.Configuration.GetRequiredSection("discord-api:global-chat-mirroring:enabled").Get<bool>())
+            {
+                return new GlobalChatMirrorManager(globalChatConfig, s.Torch);
+            }
+
+            return null;
+        });
+
+        sessionManager.AddFactory(_ =>
+        {
+            if (configManager.Configuration.GetValue<bool>("discord-api:command-executor:enabled"))
+            {
+                return new CommandExecutorManager(
+                    configManager.Configuration.GetValue("discord-api:command-executor:name", "eval")!
+                );
+            }
+
+            return null;
+        });
 
         sessionManager.AddFactory(s =>
         {
@@ -39,8 +71,6 @@ public class Plugin : TorchPluginBase
                 configManager.Configuration.GetValue<long?>("discord-api:main-guild-id") ??
                 throw new InvalidOperationException("Missing main guild id"));
         });
-        
-        sessionManager.AddFactory(_ => new InternalLinkManager(this));
 
         /*torch.GameStateChanged += (_, state) =>
         {

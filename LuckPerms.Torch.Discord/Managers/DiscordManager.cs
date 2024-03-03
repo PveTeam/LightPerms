@@ -22,10 +22,10 @@ public class DiscordManager(ITorchBase torch, string token, long mainGuildId) : 
     
     public override void Attach()
     {
-        var builder = JDABuilder.create(GatewayIntent.GUILD_MEMBERS)
+        var builder = JDABuilder.create(GatewayIntent.GUILD_MEMBERS, GatewayIntent.GUILD_MESSAGES, GatewayIntent.MESSAGE_CONTENT)
             .setToken(token)
             .setEventPool(new TorchExecutor(Torch))
-            .disableCache(CacheFlag.ACTIVITY, CacheFlag.VOICE_STATE, CacheFlag.EMOJI, CacheFlag.STICKER,
+            .disableCache(CacheFlag.ACTIVITY, CacheFlag.VOICE_STATE, CacheFlag.STICKER,
                 CacheFlag.CLIENT_STATUS, CacheFlag.ONLINE_STATUS, CacheFlag.SCHEDULED_EVENTS);
         
         foreach (var listenerAdapter in Torch.CurrentSession.Managers.AttachOrder.OfType<ListenerAdapter>())
