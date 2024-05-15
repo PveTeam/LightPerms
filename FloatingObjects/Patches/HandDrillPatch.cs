@@ -1,5 +1,6 @@
 ﻿using System.Reflection;
 using Sandbox.Game.Entities;
+using Sandbox.Game.Entities.Character;
 using Sandbox.Game.Weapons;
 using Torch.Managers.PatchManager;
 using Torch.Utils;
@@ -22,10 +23,10 @@ internal static class HandDrillPatch
 
     private static bool Prefix(MyDrillBase __instance)
     {
-        if (__instance.OutputInventory == null ||
-            __instance.IgnoredEntities.ElementAtOrDefault(0) is not MyHandDrill { Owner: not null } drill) return false;
+        if (__instance.OutputInventory != null ||
+            __instance.IgnoredEntities.OfType<MyCharacter>().FirstOrDefault() is not { } owner) return false;
         
-        __instance.OutputInventory = drill.Owner.GetInventory();
+        __instance.OutputInventory = owner.GetInventory();
         InventoryCollectionRatioSetter(__instance, (MyFixedPoint)0.9f);
         return false;
 
