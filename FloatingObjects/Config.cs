@@ -19,10 +19,6 @@ public class Config : ViewModel
         GroupName = "Floating Objects")]
     public bool AutoOrePickup { get; set; }
 
-    [Display(Name = "Disable Scrap", Description = "Disables scrap metal spawning when destroying block.",
-        GroupName = "Floating Objects")]
-    public bool DisableScrap { get; set; }
-
     [Display(Name = "Stack Dropped Items",
         Description = "Stack all items dropped from destroyed cargo or any block with inventory. (Would work only if temp/loot container spawn is disabled in world settings)",
         GroupName = "Floating Objects")]

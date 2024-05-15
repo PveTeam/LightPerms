@@ -34,7 +34,6 @@ public class Plugin : TorchPluginBase, IWpfPlugin
             if (_persistent.Data.AutoOrePickup) HandDrillPatch.Patch(patchContext);
             if (_persistent.Data.StackDropItems) StackItemsPatch.Patch(patchContext);
             if (_persistent.Data.DisableAmmoDetonation) AmmoDetonationPatch.Patch(patchContext);
-            MyFakes.ENABLE_SCRAP = !_persistent.Data.DisableScrap;
             
             manager.Commit();
         };
