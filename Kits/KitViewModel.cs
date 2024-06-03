@@ -22,10 +22,10 @@ public class KitViewModel : ViewModel
     [Display(Name = "Lp Permission", GroupName = "Conditions", Description = "Luck Perms permission to use this kit (leave empty to disable, example: kits.vip)")]
     public string LpPermission { get; set; } = "";
     [Display(Name = "Respawn Pod Wildcards", GroupName = "Usage", Description = "Respawn pod name wildcard to filter usage of kit, leave empty to disable")]
-    public ObservableCollection<string> RespawnPodWildcards { get; set; } = new();
+    public ObservableCollection<string> RespawnPodWildcards { get; set; } = [];
     [Display(Name = "Items", GroupName = "General", EditorType = typeof(EditButton))]
     [XmlArrayItem("Item")]
-    public ObservableCollection<KitItemViewModel> Items { get; set; } = new();
+    public ObservableCollection<KitItemViewModel> Items { get; set; } = [];
 
     public override string ToString()
     {

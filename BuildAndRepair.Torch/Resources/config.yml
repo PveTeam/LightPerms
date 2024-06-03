@@ -1,0 +1,114 @@
+# Settings file for NanobotBuildAndRepairSystem
+
+# Disable localization for everyone
+disableLocalization: false
+
+# Maximum number of background tasks
+maxBackgroundTasks: 4
+
+# Targets update interval
+targetsUpdateInterval: '00:00:10'
+
+# Sources update interval
+sourcesUpdateInterval: '00:01:00'
+
+# Friendly damage timeout 
+friendlyDamageTimeout: '00:01:00'
+
+# Friendly damage cleanup 
+friendlyDamageCleanup: '00:00:10'
+
+# Default range (meters) *2 = AreaSize
+range: 100
+
+# Maximum offset (meters)
+maximumOffset: 150
+
+# Maximum required electric power for standby (megawatts)
+maximumRequiredElectricPowerStandby: 0.001
+
+# Maximum required electric power for transport (megawatts)
+maximumRequiredElectricPowerTransport: 0.1
+
+# Settings for the nanobot repair block
+welder:
+    # Maximum required electric power for welding (megawatts)
+    maximumRequiredElectricPowerWelding: 0.2
+    
+    # Maximum required electric power for grinding (megawatts)
+    maximumRequiredElectricPowerGrinding: 0.2
+    
+    # Welding speed multiplier
+    weldingMultiplier: 1.0
+    
+    # Grinding speed multiplier
+    grindingMultiplier: 1.0
+    
+    # Allowed search modes
+    allowedSearchModes: grids, boundingBox
+    
+    # Default search mode
+    searchModeDefault: grids
+    
+    # Allowed work modes
+    allowedWorkModes: grindBeforeWeld, grindIfWeldGetStuck, weldBeforeGrind, weldOnly, grindOnly
+    
+    # Default work mode
+    workModeDefault: weldBeforeGrind
+    
+    # Disallow changing of ignore color
+    useIgnoreColorFixed: false
+    
+    # Use ignore color by default
+    useIgnoreColorDefault: true
+    
+    # Default HSV value for ignore color
+    ignoreColorDefault: [ 321, 100, 51 ]
+    
+    # Disallow changing of grind color
+    useGrindColorFixed: false
+    
+    # Use grind color by default
+    useGrindColorDefault: true
+    
+    # Default HSV value for grind color
+    grindColorDefault: [ 321, 100, 51 ]
+    
+    # Disallow changing grind janitor settings
+    useGrindJanitorFixed: false
+    
+    # Auto Grind default settings (noOwnership, enemies, neutral, owner, factionShare)
+    useGrindJanitorDefault: enemies, noOwnership
+    
+    # Default options for Grind Janitor (none, disableOnly, hackOnly)
+    grindJanitorOptionsDefault: none
+    
+    # Allowed Grind Janitor relations (noOwnership, enemies, neutral, owner, factionShare)
+    allowedGrindJanitorRelations: noOwnership, enemies, neutral
+    
+    # Disallow changing of various settings 
+    showAreaFixed: false
+    areaSizeFixed: false
+    areaOffsetFixed: false
+    priorityFixed: false
+    collectPriorityFixed: false
+    
+    pushIngotOreImmediatelyFixed: false
+    pushIngotOreImmediatelyDefault: true
+    
+    pushItemsImmediatelyFixed: false
+    pushItemsImmediatelyDefault: true
+    
+    pushComponentImmediatelyFixed: false
+    pushComponentImmediatelyDefault: true
+    
+    collectIfIdleDefault: false
+    
+    soundVolumeFixed: false
+    # Default sound volume (0.0 - 1.0)
+    soundVolumeDefault: 1
+    
+    scriptControllFixed: false
+    
+    # Allowed visual effects and sounds (weldingVisualEffect, weldingSoundEffect, grindingVisualEffect, grindingSoundEffect, transportVisualEffect)
+    allowedEffects: weldingVisualEffect, weldingSoundEffect, grindingVisualEffect, grindingSoundEffect, transportVisualEffect

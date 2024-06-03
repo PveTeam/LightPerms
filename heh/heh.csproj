@@ -5,8 +5,9 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <PlatformTarget>x64</PlatformTarget>
-        <LangVersion>10</LangVersion>
+        <LangVersion>12</LangVersion>
         <UseWpf>true</UseWpf>
+        <RestoreAdditionalProjectSources>https://nuget.storage.yandexcloud.net/index.json</RestoreAdditionalProjectSources>
     </PropertyGroup>
 
     <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
@@ -16,6 +17,6 @@
     <ItemGroup>
         <PackageReference Include="PetaPoco.Compiled" Version="6.0.480" />
         <PackageReference Include="PropertyChanged.Fody" Version="4.1.0" PrivateAssets="all" />
-        <PackageReference Include="Torch.Server.ReferenceAssemblies" Version="1.3.1.260-master" PrivateAssets="all" IncludeAssets="compile" />
+        <PackageReference Include="Torch.Server.ReferenceAssemblies" Version="1.3.*-master*" ExcludeAssets="runtime" />
     </ItemGroup>
 </Project>

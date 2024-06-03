@@ -12,7 +12,7 @@ public class Config : ViewModel
 {
     [Display(Name = "Kits", EditorType = typeof(EditButton))]
     [XmlArrayItem("Kit")]
-    public ObservableCollection<KitViewModel> Kits { get; set; } = new();
+    public ObservableCollection<KitViewModel> Kits { get; set; } = [];
 
     [XmlAttribute(Form = XmlSchemaForm.Qualified, Namespace = "http://www.w3.org/2001/XMLSchema-instance")]
     // ReSharper disable once InconsistentNaming

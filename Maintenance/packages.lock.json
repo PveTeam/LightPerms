@@ -73,13 +73,13 @@
       },
       "Torch.Server.ReferenceAssemblies": {
         "type": "Direct",
-        "requested": "[1.3.1.260-master, )",
-        "resolved": "1.3.1.260-master",
-        "contentHash": "p9fHBwPI2BZDLO2PiSPvJxHQ7lksYf/20BZ0uUxMlSnJk/AvFUpjT6CMxJWow4UuAFG+NcPEI4VhxZ5x9jhGGA==",
+        "requested": "[1.3.*-master*, )",
+        "resolved": "1.3.1.294-master",
+        "contentHash": "Jhb3VH5NaOAcsgqQjY9v8pae+SHZa31c5a9hAdx2Q7oVLLn2ydP1uy0xsYTSj7ijd8AhX0SlL//zYrG/CVwpUg==",
         "dependencies": {
           "NLog": "4.4.12",
           "Newtonsoft.Json": "12.0.2",
-          "SpaceEngineersDedicated.ReferenceAssemblies": "1.203.505"
+          "SpaceEngineersDedicated.ReferenceAssemblies": "1.0.0"
         }
       },
       "IKVM": {

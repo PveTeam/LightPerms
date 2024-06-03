@@ -1,4 +1,5 @@
-﻿using heh;
+﻿using System.Diagnostics.CodeAnalysis;
+using heh;
 using net.luckperms.api;
 using NLog;
 using PetaPoco;
@@ -58,24 +59,36 @@ public class KitManager : Manager, IKitManager
     {
         GiveKit(player, inventory, GetKit(kitName));
     }
-    public bool CanGiveKit(MyPlayer player, string kitName, out string reason)
+    public bool CanGiveKit(MyPlayer player, string kitName, [NotNullWhen(false)] out string? reason)
     {
         return CanGiveKit(player, GetKit(kitName), out reason);
     }
-    public bool CanGiveRespawnKit(MyPlayer player, string kitName, string respawnName, out string reason)
+    public bool CanGiveRespawnKit(MyPlayer player, string kitName, string respawnName, [NotNullWhen(false)] out string? reason)
     {
         return CanGiveRespawnKit(player, GetKit(kitName), respawnName, out reason);
     }
     public KitViewModel GetKit(string kitName)
     {
-        return _config.Kits.First(b => b.Name == kitName);
+        return _config.Kits.FirstOrDefault(b => b.Name == kitName) ?? throw new KitNotFoundException(kitName);
     }
-    public bool TryGetKit(string kitName, out KitViewModel? kit)
+    public bool TryGetKit(string kitName, [NotNullWhen(true)] out KitViewModel? kit)
     {
         kit = _config.Kits.FirstOrDefault(b => b.Name == kitName);
         return kit is not null;
     }
-    
+
+    public IReadOnlyCollection<KitViewModel> ListKits()
+    {
+        return _config.Kits.ToArray();
+    }
+
+    public IReadOnlyCollection<(KitViewModel kit, string? reason)> ListKits(MyPlayer player)
+    {
+        return _config.Kits
+            .Select(b => CanGiveKit(player, b, out var reason) ? (b, reason) : (b, null))
+            .ToArray();
+    }
+
     public void GiveKit(MyPlayer player, MyInventoryBase inventory, KitViewModel kit)
     {
         if (kit.UseCooldownMinutes > 0)
@@ -94,9 +107,9 @@ public class KitManager : Manager, IKitManager
         Log.Info($"Given kit {kit.Name} to {player.DisplayName} ({player.Id.SteamId})");
     }
     
-    public bool CanGiveKit(MyPlayer player, KitViewModel kit, out string reason)
+    public bool CanGiveKit(MyPlayer player, KitViewModel kit, [NotNullWhen(false)] out string? reason)
     {
-        reason = string.Empty;
+        reason = null;
         
         var level = MySession.Static.GetUserPromoteLevel(player.Id.SteamId);
         if (level < kit.RequiredPromoteLevel ||
@@ -135,11 +148,11 @@ public class KitManager : Manager, IKitManager
             return true;
         }
         
-        reason = $"Next use available in {TimeSpan.FromMinutes(kit.UseCooldownMinutes) - cooldown:dd\\.hh\\:mm\\:ss}";
+        reason = $@"Next use available in {TimeSpan.FromMinutes(kit.UseCooldownMinutes) - cooldown:dd\.hh\:mm\:ss}";
         return false;
 
     }
-    public bool CanGiveRespawnKit(MyPlayer player, KitViewModel kit, string respawnName, out string reason)
+    public bool CanGiveRespawnKit(MyPlayer player, KitViewModel kit, string respawnName, [NotNullWhen(false)] out string? reason)
     {
         reason = "Invalid respawn name";
         return kit.RespawnPodWildcards.Any(respawnName.Glob) && CanGiveKit(player, kit, out reason);
@@ -169,10 +182,14 @@ public interface IKitManager : IManager
 {
     void GiveKit(MyPlayer player, MyInventoryBase inventory, string kitName);
     void GiveKit(MyPlayer player, MyInventoryBase inventory, KitViewModel kit);
-    bool CanGiveKit(MyPlayer player, string kitName, out string reason);
-    bool CanGiveKit(MyPlayer player, KitViewModel kit, out string reason);
-    bool CanGiveRespawnKit(MyPlayer player, KitViewModel kit, string respawnName, out string reason);
-    bool CanGiveRespawnKit(MyPlayer player, string kitName, string respawnName, out string reason);
+    bool CanGiveKit(MyPlayer player, string kitName, [NotNullWhen(false)] out string? reason);
+    bool CanGiveKit(MyPlayer player, KitViewModel kit, [NotNullWhen(false)] out string? reason);
+    bool CanGiveRespawnKit(MyPlayer player, KitViewModel kit, string respawnName, [NotNullWhen(false)] out string? reason);
+    bool CanGiveRespawnKit(MyPlayer player, string kitName, string respawnName, [NotNullWhen(false)] out string? reason);
     KitViewModel GetKit(string kitName);
-    bool TryGetKit(string kitName, out KitViewModel? kit);
+    bool TryGetKit(string kitName, [NotNullWhen(true)] out KitViewModel? kit);
+    IReadOnlyCollection<KitViewModel> ListKits();
+    IReadOnlyCollection<(KitViewModel kit, string? reason)> ListKits(MyPlayer player);
 }
+
+public class KitNotFoundException(string kitName) : KeyNotFoundException($"Kit {kitName} not found.");
