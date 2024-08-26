@@ -32,7 +32,8 @@ public static class StreamExtensions
         {
             try
             {
-                return stream.Read(b, off, len);
+                var result = stream.Read(b, off, len);
+                return result <= 0 ? -1 : result;
             }
             catch (SystemIOException e)
             {

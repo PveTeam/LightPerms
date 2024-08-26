@@ -89,7 +89,7 @@ public class LpTorchBootstrap : LuckPermsBootstrap
     public InputStream? getResourceStream(string path)
     {
         var normalizedPath = path.Replace('/', '.');
-        using var dotnetStream = typeof(LpTorchBootstrap).Assembly.GetManifestResourceStream(normalizedPath);
+        var dotnetStream = typeof(LpTorchBootstrap).Assembly.GetManifestResourceStream(normalizedPath);
         
         return dotnetStream?.GetInputStream();
     }
